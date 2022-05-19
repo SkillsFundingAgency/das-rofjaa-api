@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace SFA.DAS.Rofjaa.Domain.ImportTypes
+namespace SFA.DAS.Rofjaa.Domain.Types
 {
     public class Agency
     {
@@ -10,7 +10,7 @@ namespace SFA.DAS.Rofjaa.Domain.ImportTypes
         public int LegalIdentityId { get; set; }
 
         [JsonProperty("Grant")]
-        public string Grant { get; set; }
+        public bool Grant { get; set; }
         
     }
 }
