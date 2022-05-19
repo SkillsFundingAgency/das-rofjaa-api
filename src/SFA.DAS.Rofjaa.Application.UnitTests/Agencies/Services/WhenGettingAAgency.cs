@@ -4,7 +4,6 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using SFA.DAS.Rofjaa.Application.Agencies.Services;
-using SFA.DAS.Rofjaa.Domain.Entities;
 using SFA.DAS.Rofjaa.Domain.Interfaces;
 using SFA.DAS.Testing.AutoFixture;
 

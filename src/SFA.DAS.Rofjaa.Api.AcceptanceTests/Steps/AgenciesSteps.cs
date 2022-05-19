@@ -4,7 +4,6 @@ using FluentAssertions;
 using NUnit.Framework;
 using SFA.DAS.Rofjaa.Api.AcceptanceTests.Infrastructure;
 using SFA.DAS.Rofjaa.Api.ApiResponses;
-using SFA.DAS.Rofjaa.Domain.Entities;
 using TechTalk.SpecFlow;
 
 namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Steps

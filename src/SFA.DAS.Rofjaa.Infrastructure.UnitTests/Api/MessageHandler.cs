@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Moq;
 using Moq.Protected;
-using SFA.DAS.Rofjaa.Domain.Configuration;
 
 namespace SFA.DAS.Rofjaa.Infrastructure.UnitTests.Api
 {

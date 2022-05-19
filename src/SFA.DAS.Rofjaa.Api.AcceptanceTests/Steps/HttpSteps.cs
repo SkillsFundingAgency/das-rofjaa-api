@@ -2,8 +2,6 @@
 using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
-using SFA.DAS.Rofjaa.Api.AcceptanceTests.Steps;
-using SFA.DAS.Rofjaa.Api;
 using SFA.DAS.Rofjaa.Api.AcceptanceTests.Infrastructure;
 using TechTalk.SpecFlow;
 using HttpMethod = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpMethod;

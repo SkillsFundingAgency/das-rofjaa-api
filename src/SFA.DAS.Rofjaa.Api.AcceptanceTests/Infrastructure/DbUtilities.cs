@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using SFA.DAS.Rofjaa.Data;
-using SFA.DAS.Rofjaa.Domain.Entities;
 using Agency = SFA.DAS.Rofjaa.Domain.Entities.Agency;
 
 namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Infrastructure
