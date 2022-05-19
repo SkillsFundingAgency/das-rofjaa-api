@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
+using SFA.DAS.Rofjaa.Api.AcceptanceTests.Steps;
+using SFA.DAS.Rofjaa.Api;
 using SFA.DAS.Rofjaa.Api.AcceptanceTests.Infrastructure;
 using TechTalk.SpecFlow;
 using HttpMethod = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpMethod;
@@ -23,7 +25,7 @@ namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Steps
         {
             var client = new AcceptanceTestingWebApplicationFactory<Startup>().CreateClient();
             client.DefaultRequestHeaders.Add("X-Version", "1.0");
-            _context.Set(client,ContextKeys.HttpClient);
+            _context.Set(client, ContextKeys.HttpClient);
         }
 
         [When("I (GET|POST|PUT|DELETE) the following url: (.*)")]

@@ -34,13 +34,13 @@ namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Infrastructure
                     .AddEntityFrameworkProxies()
                     .BuildServiceProvider();
 
-                services.AddDbContext<CoursesDataContext>(options =>
+                services.AddDbContext<RofjaaDataContext>(options =>
                 {
                     options.UseInMemoryDatabase("SFA.DAS.Rofjaa");
                     options.UseInternalServiceProvider(serviceProvider);
                     options.EnableSensitiveDataLogging();
                 });
-                services.AddTransient(provider => new Lazy<CoursesDataContext>(provider.GetService<CoursesDataContext>()));
+                services.AddTransient(provider => new Lazy<RofjaaDataContext>(provider.GetService<RofjaaDataContext>()));
 
                 
                 var sp = services.BuildServiceProvider();
@@ -48,7 +48,7 @@ namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Infrastructure
                 using (var scope = sp.CreateScope())
                 {
                     var scopedServices = scope.ServiceProvider;
-                    var db = scopedServices.GetRequiredService<CoursesDataContext>();
+                    var db = scopedServices.GetRequiredService<RofjaaDataContext>();
                     var logger = scopedServices
                         .GetRequiredService<ILogger<AcceptanceTestingWebApplicationFactory<TStartup>>>();
 

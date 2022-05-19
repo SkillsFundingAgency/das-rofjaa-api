@@ -21,7 +21,7 @@ namespace SFA.DAS.Rofjaa.Application.UnitTests.Agency.Queries
             GetAgencyQueryHandler handler)
         {
             mockFrameworksService
-                .Setup(service => service.GetAgency(query.AgencyId))
+                .Setup(service => service.GetAgency(query.LegalIdentityId))
                 .ReturnsAsync(agencyFromService);
 
             var result = await handler.Handle(query, CancellationToken.None);

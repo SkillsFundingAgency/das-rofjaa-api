@@ -26,7 +26,7 @@ namespace SFA.DAS.Rofjaa.Api.UnitTests.Controllers.Agency
         {
             mockMediator
                 .Setup(mediator => mediator.Send(
-                    It.Is<GetAgencyQuery>(c=>c.AgencyId.Equals(agencyId)), 
+                    It.Is<GetAgencyQuery>(c=>c.LegalIdentityId.Equals(agencyId)), 
                     It.IsAny<CancellationToken>()))
                 .ReturnsAsync(queryResult);
 

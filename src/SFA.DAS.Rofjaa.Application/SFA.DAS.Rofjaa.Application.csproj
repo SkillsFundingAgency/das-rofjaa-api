@@ -9,4 +9,10 @@
   <ItemGroup>
     <ProjectReference Include="..\SFA.DAS.Rofjaa.Domain\SFA.DAS.Rofjaa.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Agencies\Handlers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Agencies\Handlers\" />
+  </ItemGroup>
 </Project>

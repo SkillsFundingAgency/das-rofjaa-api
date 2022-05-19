@@ -9,31 +9,31 @@ using SFA.DAS.Rofjaa.Domain.Configuration;
 
 namespace SFA.DAS.Rofjaa.Data
 {
-    public interface IFjaaDataContext
+    public interface IRofjaaDataContext
     {
         DbSet<Domain.Entities.Agency> Agency { get; set; }
     
         int SaveChanges();
     }
     
-    public partial class FjaaDataContext : DbContext, IFjaaDataContext
+    public partial class RofjaaDataContext : DbContext, IRofjaaDataContext
     {
         private const string AzureResource = "https://database.windows.net/";
 
         public DbSet<Domain.Entities.Agency> Agency { get; set; }
 
-        private readonly FjaaConfiguration _configuration;
+        private readonly RofjaaConfiguration _configuration;
         private readonly AzureServiceTokenProvider _azureServiceTokenProvider;
      
-        public FjaaDataContext()
+        public RofjaaDataContext()
         {
         }
 
-        public FjaaDataContext(DbContextOptions options) : base(options)
+        public RofjaaDataContext(DbContextOptions options) : base(options)
         {
             
         }
-        public FjaaDataContext(IOptions<FjaaConfiguration> config, DbContextOptions options, AzureServiceTokenProvider azureServiceTokenProvider) :base(options)
+        public RofjaaDataContext(IOptions<RofjaaConfiguration> config, DbContextOptions options, AzureServiceTokenProvider azureServiceTokenProvider) :base(options)
         {
             _configuration = config.Value;
             _azureServiceTokenProvider = azureServiceTokenProvider;

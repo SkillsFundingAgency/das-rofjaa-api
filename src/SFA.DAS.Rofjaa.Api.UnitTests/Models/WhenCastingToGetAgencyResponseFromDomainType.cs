@@ -6,7 +6,7 @@ using SFA.DAS.Rofjaa.Domain.Entities;
 
 namespace SFA.DAS.Rofjaa.Api.UnitTests.Models
 {
-    public class WhenCastingToGetFrameworkResponseFromDomainType
+    public class WhenCastingToGetAgencyResponseFromDomainType
     {
         [Test, AutoData]
         public void Then_Maps_Fields_Appropriately(

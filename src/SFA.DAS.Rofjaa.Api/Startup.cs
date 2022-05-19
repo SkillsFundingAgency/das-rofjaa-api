@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text.Json.Serialization;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -23,6 +24,8 @@ using SFA.DAS.Rofjaa.Api.Infrastructure;
 using SFA.DAS.Rofjaa.Data;
 using SFA.DAS.Rofjaa.Domain.Configuration;
 using SFA.DAS.Rofjaa.Domain.Interfaces;
+using SFA.DAS.Rofjaa.Application.Agencies.Handlers;
+
 
 namespace SFA.DAS.Rofjaa.Api
 {
@@ -64,14 +67,14 @@ namespace SFA.DAS.Rofjaa.Api
         {
 
             services.AddOptions();
-            services.Configure<FjaaConfiguration>(_configuration.GetSection("Agencies"));
-            services.AddSingleton(cfg => cfg.GetService<IOptions<FjaaConfiguration>>().Value);
+            services.Configure<RofjaaConfiguration>(_configuration.GetSection("Agencies"));
+            services.AddSingleton(cfg => cfg.GetService<IOptions<RofjaaConfiguration>>().Value);
             services.Configure<AzureActiveDirectoryConfiguration>(_configuration.GetSection("AzureAd"));
             services.AddSingleton(cfg => cfg.GetService<IOptions<AzureActiveDirectoryConfiguration>>().Value);
 
             var coursesConfiguration = _configuration
                 .GetSection("Agencies")
-                .Get<FjaaConfiguration>();
+                .Get<RofjaaConfiguration>();
 
             if (!ConfigurationIsLocalOrDev())
             {
@@ -92,6 +95,8 @@ namespace SFA.DAS.Rofjaa.Api
             {
                 services.AddHealthChecks();
             }
+
+            services.AddMediatR(typeof(AgencyCommand).GetTypeInfo().Assembly);
 
             services.AddServiceRegistration();
 

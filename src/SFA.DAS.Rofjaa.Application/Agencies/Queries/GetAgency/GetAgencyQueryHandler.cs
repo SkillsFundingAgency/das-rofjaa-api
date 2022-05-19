@@ -15,7 +15,7 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency
         }
         public async Task<GetAgencyResult> Handle(GetAgencyQuery request, CancellationToken cancellationToken)
         {
-            var agency = await _agencyService.GetAgency(request.AgencyId);
+            var agency = await _agencyService.GetAgency(request.LegalIdentityId);
             
             return new GetAgencyResult
             {

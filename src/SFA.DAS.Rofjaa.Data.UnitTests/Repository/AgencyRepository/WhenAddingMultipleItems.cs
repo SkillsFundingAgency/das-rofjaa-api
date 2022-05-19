@@ -11,7 +11,7 @@ namespace SFA.DAS.Rofjaa.Data.UnitTests.Repository.AgencyRepository
 {
     public class WhenAddingMultipleItems
     {
-        private Mock<IFjaaDataContext> _fjaaDataContext;
+        private Mock<IRofjaaDataContext> _rofjaaDataContext;
         private Data.Repository.AgencyRepository _agencyRepository;
         private List<Agency> _agencies;
 
@@ -32,9 +32,9 @@ namespace SFA.DAS.Rofjaa.Data.UnitTests.Repository.AgencyRepository
                 }
             };
 
-            _fjaaDataContext = new Mock<IFjaaDataContext>();
-            _fjaaDataContext.Setup(x => x.Agency).ReturnsDbSet(new List<Agency>());
-            _agencyRepository = new Data.Repository.AgencyRepository(_fjaaDataContext.Object);
+            _rofjaaDataContext = new Mock<IRofjaaDataContext>();
+            _rofjaaDataContext.Setup(x => x.Agency).ReturnsDbSet(new List<Agency>());
+            _agencyRepository = new Data.Repository.AgencyRepository(_rofjaaDataContext.Object);
         }
 
         [Test]
@@ -44,8 +44,8 @@ namespace SFA.DAS.Rofjaa.Data.UnitTests.Repository.AgencyRepository
             await _agencyRepository.InsertMany(_agencies);
 
             //Assert
-            _fjaaDataContext.Verify(x=>x.Agency.AddRangeAsync(_agencies, It.IsAny<CancellationToken>()), Times.Once);
-            _fjaaDataContext.Verify(x=>x.SaveChanges(), Times.Once);
+            _rofjaaDataContext.Verify(x=>x.Agency.AddRangeAsync(_agencies, It.IsAny<CancellationToken>()), Times.Once);
+            _rofjaaDataContext.Verify(x=>x.SaveChanges(), Times.Once);
         }
     }
 }

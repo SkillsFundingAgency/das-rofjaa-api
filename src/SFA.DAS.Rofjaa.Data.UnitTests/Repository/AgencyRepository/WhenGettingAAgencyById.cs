@@ -12,7 +12,7 @@ namespace SFA.DAS.Rofjaa.Data.UnitTests.Repository.AgencyRepository
 {
     public class WhenGettingAAgencyById
     {
-        private Mock<IFjaaDataContext> _fjaaDataContext;
+        private Mock<IRofjaaDataContext> _rofjaaDataContext;
         private List<Agency> _agencies;
         private Data.Repository.AgencyRepository _agencyRepository;
         private const int ExpectedAgencyId = 1;
@@ -32,10 +32,10 @@ namespace SFA.DAS.Rofjaa.Data.UnitTests.Repository.AgencyRepository
                 }
             };
 
-            _fjaaDataContext = new Mock<IFjaaDataContext>();
-            _fjaaDataContext.Setup(x => x.Agency).ReturnsDbSet(_agencies);
+            _rofjaaDataContext = new Mock<IRofjaaDataContext>();
+            _rofjaaDataContext.Setup(x => x.Agency).ReturnsDbSet(_agencies);
 
-            _agencyRepository = new Data.Repository.AgencyRepository(_fjaaDataContext.Object);
+            _agencyRepository = new Data.Repository.AgencyRepository(_rofjaaDataContext.Object);
         }
 
         [Test]

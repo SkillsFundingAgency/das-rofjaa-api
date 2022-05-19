@@ -11,7 +11,7 @@ namespace SFA.DAS.Rofjaa.Data.UnitTests.Repository.AgencyRepository
     public class WhenGettingAllItems
     {
         private List<Agency> _agencies;  
-        private Mock<IFjaaDataContext> _fjaaDataContext;
+        private Mock<IRofjaaDataContext> _rofjaaDataContext;
         private Data.Repository.AgencyRepository _agencyRepository;
 
         [SetUp]
@@ -29,10 +29,10 @@ namespace SFA.DAS.Rofjaa.Data.UnitTests.Repository.AgencyRepository
                 }
             };
 
-            _fjaaDataContext = new Mock<IFjaaDataContext>();
-            _fjaaDataContext.Setup(x => x.Agency).ReturnsDbSet(_agencies);
+            _rofjaaDataContext = new Mock<IRofjaaDataContext>();
+            _rofjaaDataContext.Setup(x => x.Agency).ReturnsDbSet(_agencies);
 
-            _agencyRepository = new Data.Repository.AgencyRepository(_fjaaDataContext.Object);
+            _agencyRepository = new Data.Repository.AgencyRepository(_rofjaaDataContext.Object);
         }
 
         [Test]

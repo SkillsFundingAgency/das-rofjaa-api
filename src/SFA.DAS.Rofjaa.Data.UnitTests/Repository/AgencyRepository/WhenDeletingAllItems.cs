@@ -9,7 +9,7 @@ namespace SFA.DAS.Rofjaa.Data.UnitTests.Repository.AgencyRepository
 {
     public class WhenDeletingAllItems
     {
-        private Mock<IFjaaDataContext> _fjaaDataContext;
+        private Mock<IRofjaaDataContext> _rofjaaDataContext;
         private List<Agency> _frameworks;
         private Data.Repository.AgencyRepository _frameworkRepository;
 
@@ -28,11 +28,11 @@ namespace SFA.DAS.Rofjaa.Data.UnitTests.Repository.AgencyRepository
                 }
             };
 
-            _fjaaDataContext = new Mock<IFjaaDataContext>();
-            _fjaaDataContext.Setup(x => x.Agency).ReturnsDbSet(_frameworks);
+            _rofjaaDataContext = new Mock<IRofjaaDataContext>();
+            _rofjaaDataContext.Setup(x => x.Agency).ReturnsDbSet(_frameworks);
             
 
-            _frameworkRepository = new Data.Repository.AgencyRepository(_fjaaDataContext.Object);
+            _frameworkRepository = new Data.Repository.AgencyRepository(_rofjaaDataContext.Object);
         }
 
         [Test]
@@ -42,8 +42,8 @@ namespace SFA.DAS.Rofjaa.Data.UnitTests.Repository.AgencyRepository
             _frameworkRepository.DeleteAll();
 
             //Assert
-            _fjaaDataContext.Verify(x=>x.Agency.RemoveRange(_fjaaDataContext.Object.Agency), Times.Once);
-            _fjaaDataContext.Verify(x=>x.SaveChanges(), Times.Once);
+            _rofjaaDataContext.Verify(x=>x.Agency.RemoveRange(_rofjaaDataContext.Object.Agency), Times.Once);
+            _rofjaaDataContext.Verify(x=>x.SaveChanges(), Times.Once);
         }
     }
 }

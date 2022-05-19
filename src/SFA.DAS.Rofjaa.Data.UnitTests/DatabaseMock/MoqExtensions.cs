@@ -33,8 +33,8 @@ namespace SFA.DAS.Rofjaa.Data.UnitTests.DatabaseMock
             return BuildMockDbSet(data.AsQueryable()).Object;
         }
 
-        public static IReturnsResult<IFjaaDataContext> ReturnsDbSet<TEntity>(
-            this ISetup<IFjaaDataContext, DbSet<TEntity>> setupResult,
+        public static IReturnsResult<IRofjaaDataContext> ReturnsDbSet<TEntity>(
+            this ISetup<IRofjaaDataContext, DbSet<TEntity>> setupResult,
             IEnumerable<TEntity> entities) where TEntity : class
         {
             return setupResult.Returns(entities.BuildDbSet());

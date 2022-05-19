@@ -4,23 +4,23 @@ using FluentAssertions;
 using NUnit.Framework;
 using SFA.DAS.Rofjaa.Api.AcceptanceTests.Infrastructure;
 using SFA.DAS.Rofjaa.Api.ApiResponses;
-using SFA.DAS.Rofjaa.Domain.Courses;
+using SFA.DAS.Rofjaa.Domain.Entities;
 using TechTalk.SpecFlow;
 
 namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Steps
 {
     [Binding]
-    public class FrameworksSteps
+    public class AgencySteps
     {
         private readonly ScenarioContext _context;
 
-        public FrameworksSteps(ScenarioContext context)
+        public AgencySteps(ScenarioContext context)
         {
             _context = context;
         }
 
-        [Then("all frameworks are returned")]
-        public async Task ThenAllFrameworksReturned()
+        [Then("all agencies are returned")]
+        public async Task ThenAllAgenciesReturned()
         {
             if (!_context.TryGetValue<HttpResponseMessage>(ContextKeys.HttpResponse, out var result))
             {
@@ -28,18 +28,13 @@ namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Steps
             }
 
             var model = await HttpUtilities.ReadContent<GetAgenciesResponse>(result.Content);
-            var expected = DbUtilities.GetFrameworks();
+            var expected = DbUtilities.GetAgencies();
 
-            model.Frameworks.Should().BeEquivalentTo(expected, options => options
-                .Excluding(frm => frm.FundingPeriods)
-                .Excluding(frm => frm.TypicalLengthFrom)
-                .Excluding(frm => frm.TypicalLengthTo)
-                .Excluding(frm => frm.TypicalLengthUnit)
-            );
+            model.Agencies.Should().BeEquivalentTo(expected);
         }
 
-        [Then("the framework with id equal to 1 is returned")]
-        public async Task ThenFrameworkIsReturned()
+        [Then("the agency with id equal to 1 is returned")]
+        public async Task ThenAgencyIsReturned()
         {
             if (!_context.TryGetValue<HttpResponseMessage>(ContextKeys.HttpResponse, out var result))
             {
@@ -47,14 +42,9 @@ namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Steps
             }
 
             var model = await HttpUtilities.ReadContent<GetAgencyResponse>(result.Content);
-            var expected = DbUtilities.GetFramework("1");
+            var expected = DbUtilities.GetAgency(1);
 
-            model.Should().BeEquivalentTo(expected, options => options
-                .Excluding(frm => frm.FundingPeriods)
-                .Excluding(frm => frm.TypicalLengthFrom)
-                .Excluding(frm => frm.TypicalLengthTo)
-                .Excluding(frm => frm.TypicalLengthUnit)
-            );
+            model.Should().BeEquivalentTo(expected);
         }
     }
 }

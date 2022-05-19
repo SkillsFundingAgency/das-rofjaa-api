@@ -9,24 +9,24 @@ namespace SFA.DAS.Rofjaa.Api.AppStart
 {
     public static class AddDatabaseExtension
     {
-        public static void AddDatabaseRegistration(this IServiceCollection services, FjaaConfiguration config, string environmentName)
+        public static void AddDatabaseRegistration(this IServiceCollection services, RofjaaConfiguration config, string environmentName)
         {
             if (environmentName.Equals("DEV", StringComparison.CurrentCultureIgnoreCase))
             {
-                services.AddDbContext<FjaaDataContext>(options => options.UseInMemoryDatabase("SFA.DAS.Rofjaa"), ServiceLifetime.Transient);
+                services.AddDbContext<RofjaaDataContext>(options => options.UseInMemoryDatabase("SFA.DAS.Rofjaa"), ServiceLifetime.Transient);
             }
             else if (environmentName.Equals("LOCAL", StringComparison.CurrentCultureIgnoreCase))
             {
-                services.AddDbContext<FjaaDataContext>(options=>options.UseSqlServer(config.ConnectionString),ServiceLifetime.Transient);
+                services.AddDbContext<RofjaaDataContext>(options=>options.UseSqlServer(config.ConnectionString),ServiceLifetime.Transient);
             }
             else
             {
                 services.AddSingleton(new AzureServiceTokenProvider());
-                services.AddDbContext<FjaaDataContext>(ServiceLifetime.Transient);    
+                services.AddDbContext<RofjaaDataContext>(ServiceLifetime.Transient);    
             }
             
-            services.AddTransient<IFjaaDataContext, FjaaDataContext>(provider => provider.GetService<FjaaDataContext>());
-            services.AddTransient(provider => new Lazy<FjaaDataContext>(provider.GetService<FjaaDataContext>()));
+            services.AddTransient<IRofjaaDataContext, RofjaaDataContext>(provider => provider.GetService<RofjaaDataContext>());
+            services.AddTransient(provider => new Lazy<RofjaaDataContext>(provider.GetService<RofjaaDataContext>()));
             
         }
     }

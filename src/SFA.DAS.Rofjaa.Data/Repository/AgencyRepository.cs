@@ -9,28 +9,28 @@ namespace SFA.DAS.Rofjaa.Data.Repository
 {
     public class AgencyRepository : IAgencyRepository
     {
-        private readonly IFjaaDataContext _fjaaDataContext;
+        private readonly IRofjaaDataContext _rofjaaDataContext;
 
-        public AgencyRepository(IFjaaDataContext fjaaDataContext)
+        public AgencyRepository(IRofjaaDataContext rofjaaDataContext)
         {
-            _fjaaDataContext = fjaaDataContext;
+            _rofjaaDataContext = rofjaaDataContext;
         }
 
         public async Task InsertMany(IEnumerable<Agency> agencies)
         {
-            await _fjaaDataContext.Agency.AddRangeAsync(agencies);
-            _fjaaDataContext.SaveChanges();
+            await _rofjaaDataContext.Agency.AddRangeAsync(agencies);
+            _rofjaaDataContext.SaveChanges();
         }
 
         public void DeleteAll()
         {
-            _fjaaDataContext.Agency.RemoveRange(_fjaaDataContext.Agency);
-            _fjaaDataContext.SaveChanges();
+            _rofjaaDataContext.Agency.RemoveRange(_rofjaaDataContext.Agency);
+            _rofjaaDataContext.SaveChanges();
         }
 
         public async Task<Agency> Get(int id)
         {
-            var agency = await _fjaaDataContext
+            var agency = await _rofjaaDataContext
                 .Agency
                 .SingleOrDefaultAsync(c=>c.LegalIdentityId.Equals(id));
             return agency;
@@ -38,7 +38,7 @@ namespace SFA.DAS.Rofjaa.Data.Repository
 
         public async Task<IEnumerable<Agency>> GetAll()
         {
-            var agencies = await _fjaaDataContext
+            var agencies = await _rofjaaDataContext
                 .Agency
                 .ToListAsync();
 
