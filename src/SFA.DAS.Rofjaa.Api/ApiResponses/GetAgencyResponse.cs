@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using SFA.DAS.Rofjaa.Domain.Entities;
+﻿using SFA.DAS.Rofjaa.Domain.Entities;
 
 namespace SFA.DAS.Rofjaa.Api.ApiResponses
 {

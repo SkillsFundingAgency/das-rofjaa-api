@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SFA.DAS.Rofjaa.Domain.Entities
+﻿namespace SFA.DAS.Rofjaa.Domain.Entities
 {
     public class Agency
     {

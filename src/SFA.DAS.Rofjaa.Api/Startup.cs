@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -21,9 +20,7 @@ using SFA.DAS.Api.Common.Infrastructure;
 using SFA.DAS.Configuration.AzureTableStorage;
 using SFA.DAS.Rofjaa.Api.AppStart;
 using SFA.DAS.Rofjaa.Api.Infrastructure;
-using SFA.DAS.Rofjaa.Data;
 using SFA.DAS.Rofjaa.Domain.Configuration;
-using SFA.DAS.Rofjaa.Domain.Interfaces;
 using SFA.DAS.Rofjaa.Application.Agencies.Handlers;
 
 
