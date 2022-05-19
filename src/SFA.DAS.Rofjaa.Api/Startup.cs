@@ -72,7 +72,7 @@ namespace SFA.DAS.Rofjaa.Api
             services.Configure<AzureActiveDirectoryConfiguration>(_configuration.GetSection("AzureAd"));
             services.AddSingleton(cfg => cfg.GetService<IOptions<AzureActiveDirectoryConfiguration>>().Value);
 
-            var coursesConfiguration = _configuration
+            var rofjaaConfiguration = _configuration
                 .GetSection("Agencies")
                 .Get<RofjaaConfiguration>();
 
@@ -100,7 +100,7 @@ namespace SFA.DAS.Rofjaa.Api
 
             services.AddServiceRegistration();
 
-            services.AddDatabaseRegistration(coursesConfiguration, _configuration["Environment"]);
+            services.AddDatabaseRegistration(rofjaaConfiguration, _configuration["Environment"]);
 
             services
                 .AddMvc(o =>
@@ -120,8 +120,8 @@ namespace SFA.DAS.Rofjaa.Api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AgenciesApi", Version = "v1" });
-                c.SwaggerDoc("operations", new OpenApiInfo { Title = "AgencyAPI operations" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RofjaaApi", Version = "v1" });
+                c.SwaggerDoc("operations", new OpenApiInfo { Title = "RofjaaApi operations" });
                 c.OperationFilter<SwaggerVersionHeaderFilter>();
             });
             
