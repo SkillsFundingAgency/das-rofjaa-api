@@ -22,7 +22,8 @@ using SFA.DAS.Rofjaa.Api.AppStart;
 using SFA.DAS.Rofjaa.Api.Infrastructure;
 using SFA.DAS.Rofjaa.Domain.Configuration;
 using SFA.DAS.Rofjaa.Application.Agencies.Handlers;
-
+using SFA.DAS.Rofjaa.Data;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace SFA.DAS.Rofjaa.Api
 {
@@ -64,13 +65,13 @@ namespace SFA.DAS.Rofjaa.Api
         {
 
             services.AddOptions();
-            services.Configure<RofjaaConfiguration>(_configuration.GetSection("Agencies"));
+            services.Configure<RofjaaConfiguration>(_configuration.GetSection("Rofjaa"));
             services.AddSingleton(cfg => cfg.GetService<IOptions<RofjaaConfiguration>>().Value);
             services.Configure<AzureActiveDirectoryConfiguration>(_configuration.GetSection("AzureAd"));
             services.AddSingleton(cfg => cfg.GetService<IOptions<AzureActiveDirectoryConfiguration>>().Value);
 
             var rofjaaConfiguration = _configuration
-                .GetSection("Agencies")
+                .GetSection("Rofjaa")
                 .Get<RofjaaConfiguration>();
 
             if (!ConfigurationIsLocalOrDev())
@@ -90,7 +91,9 @@ namespace SFA.DAS.Rofjaa.Api
 
             if (_configuration["Environment"] != "DEV")
             {
-                services.AddHealthChecks();
+                services.AddHealthChecks()
+                    .AddDbContextCheck<RofjaaDataContext>();
+
             }
 
             services.AddMediatR(typeof(AgencyCommand).GetTypeInfo().Assembly);
