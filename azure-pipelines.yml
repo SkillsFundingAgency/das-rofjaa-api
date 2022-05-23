@@ -12,15 +12,15 @@ trigger:
 
 variables:
 - name: SolutionBaseName
-  value: __SolutionBaseName__ #PLACEHOLDER
+  value: SFA.DAS.Rofjaa.Api
 - name: DACPACSolutionBaseName
-    value: __DACPACSolutionBaseName__ #PLACEHOLDER
+    value: SFA.DAS.Rofjaa.Database
 - name: BuildConfiguration
   value: release
 - name: BuildPlatform
   value: any cpu
 - group: RELEASE Management Resources
-- group: __ReleaseVariableGroupName__ #PLACEHOLDER
+- group: RELEASE das-rofjaa-api
 - name: Deploy
   value: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.Reason'], 'Manual'), eq(variables['Build.Reason'], 'PullRequest'))]
 
@@ -31,12 +31,12 @@ resources:
   - repository: das-platform-building-blocks
     type: github
     name: SkillsFundingAgency/das-platform-building-blocks
-    ref: refs/tags/__LATESTRELEASETAG__ #PLACEHOLDER
+    ref: refs/tags/0.4.50
     endpoint: SkillsFundingAgency
   - repository: das-platform-automation
     type: github
     name: SkillsFundingAgency/das-platform-automation
-    ref: refs/tags/__LATESTRELEASETAG__ #PLACEHOLDER
+    ref: refs/tags/4.6.0
     endpoint: SkillsFundingAgency
   pipelines:
   - pipeline: das-employer-config
