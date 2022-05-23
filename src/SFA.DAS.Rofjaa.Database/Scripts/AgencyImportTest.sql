@@ -1,2 +1,2 @@
-﻿INSERT INTO [dbo].[Agency] VALUES (1, true);
-INSERT INTO [dbo].[Agency] VALUES (2, false);
+﻿INSERT INTO [dbo].[Agency] VALUES (1, 1);
+INSERT INTO [dbo].[Agency] VALUES (2, 0);

@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Agency.sql" />
+    <Build Include="Scripts\AgencyImportTest.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SFA.DAS.Rofjaa.Database.refactorlog" />
