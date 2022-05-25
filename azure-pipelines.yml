@@ -72,41 +72,50 @@ stages:
       ServiceConnection: SFA-DAS-DevTest-ARM
       OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
 
-# - stage: Deploy_TEST
-#   dependsOn: Build
-#   displayName: Deploy to TEST
-#   variables:
-#   - group: DevTest Management Resources
-#   - group: TEST DevTest Shared Resources
-#   jobs:
-#   - template: pipeline-templates/job/deploy.yml
-#     parameters:
-#       Environment: TEST
-#       ServiceConnection: SFA-DAS-DevTest-ARM
+- stage: Deploy_TEST
+  dependsOn: Build
+  displayName: Deploy to TEST
+  variables:
+  - group: DevTest Management Resources
+  - group: TEST DevTest Shared Resources
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      Environment: TEST
+      SolutionBaseName: $(SolutionBaseName)
+      DACPACSolutionBaseName: $(DACPACSolutionBaseName)
+      ServiceConnection: SFA-DAS-DevTest-ARM
+      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
 
-# - stage: Deploy_TEST2
-#   dependsOn: Build
-#   displayName: Deploy to TEST2
-#   variables:
-#   - group: DevTest Management Resources
-#   - group: TEST2 DevTest Shared Resources
-#   jobs:
-#   - template: pipeline-templates/job/deploy.yml
-#     parameters:
-#       Environment: TEST2
-#       ServiceConnection: SFA-DAS-DevTest-ARM
+- stage: Deploy_TEST2
+  dependsOn: Build
+  displayName: Deploy to TEST2
+  variables:
+  - group: DevTest Management Resources
+  - group: TEST2 DevTest Shared Resources
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      Environment: TEST2
+      SolutionBaseName: $(SolutionBaseName)
+      DACPACSolutionBaseName: $(DACPACSolutionBaseName)
+      ServiceConnection: SFA-DAS-DevTest-ARM
+      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
 
-# - stage: Deploy_PP
-#   dependsOn: Build
-#   displayName: Deploy to PP
-#   variables:
-#   - group: PreProd Management Resources
-#   - group: PreProd Shared Resources
-#   jobs:
-#   - template: pipeline-templates/job/deploy.yml
-#     parameters:
-#       Environment: PP
-#       ServiceConnection: SFA-DIG-PreProd-ARM
+- stage: Deploy_PP
+  dependsOn: Build
+  displayName: Deploy to PP
+  variables:
+  - group: PreProd Management Resources
+  - group: PreProd Shared Resources
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      Environment: PP
+      ServiceConnection: SFA-DIG-PreProd-ARM
+      SolutionBaseName: $(SolutionBaseName)
+      DACPACSolutionBaseName: $(DACPACSolutionBaseName)
+      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
 
 # - stage: Deploy_PROD
 #   dependsOn: Build
@@ -120,6 +129,9 @@ stages:
 #     parameters:
 #       Environment: PROD
 #       ServiceConnection: SFA-DIG-Prod-ARM
+#       SolutionBaseName: $(SolutionBaseName)
+#       DACPACSolutionBaseName: $(DACPACSolutionBaseName)
+#       OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
 
 # - stage: Deploy_MO
 #   dependsOn: Build
@@ -132,15 +144,21 @@ stages:
 #     parameters:
 #       Environment: MO
 #       ServiceConnection: SFA-ASM-ModelOffice-ARM
+#       SolutionBaseName: $(SolutionBaseName)
+#       DACPACSolutionBaseName: $(DACPACSolutionBaseName)
+#       OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
 
-# - stage: Deploy_DEMO
-#   dependsOn: Build
-#   displayName: Deploy to DEMO
-#   variables:
-#   - group: DevTest Management Resources
-#   - group: DEMO DevTest Shared Resources
-#   jobs:
-#   - template: pipeline-templates/job/deploy.yml
-#     parameters:
-#       Environment: DEMO
-#       ServiceConnection: SFA-DAS-DevTest-ARM
+- stage: Deploy_DEMO
+  dependsOn: Build
+  displayName: Deploy to DEMO
+  variables:
+  - group: DevTest Management Resources
+  - group: DEMO DevTest Shared Resources
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      Environment: DEMO
+      ServiceConnection: SFA-DAS-DevTest-ARM
+      SolutionBaseName: $(SolutionBaseName)
+      DACPACSolutionBaseName: $(DACPACSolutionBaseName)
+      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
