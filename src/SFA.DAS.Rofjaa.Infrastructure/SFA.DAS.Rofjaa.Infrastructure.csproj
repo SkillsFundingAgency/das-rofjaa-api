@@ -4,6 +4,17 @@
     <ProjectGuid>BCAB4ABA-AE1F-46D0-B33B-33355F8F2FB0</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Api\**" />
+    <Compile Remove="FileHelper\**" />
+    <Compile Remove="StreamHelper\**" />
+    <EmbeddedResource Remove="Api\**" />
+    <EmbeddedResource Remove="FileHelper\**" />
+    <EmbeddedResource Remove="StreamHelper\**" />
+    <None Remove="Api\**" />
+    <None Remove="FileHelper\**" />
+    <None Remove="StreamHelper\**" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\SFA.DAS.Rofjaa.Data\SFA.DAS.Rofjaa.Data.csproj" />
     <ProjectReference Include="..\SFA.DAS.Rofjaa.Domain\SFA.DAS.Rofjaa.Domain.csproj" />
   </ItemGroup>
@@ -13,10 +24,5 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="2.2.0" />
     <PackageReference Include="SFA.DAS.Api.Common" Version="1.0.11" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Api\" />
-    <Folder Include="FileHelper\" />
-    <Folder Include="StreamHelper\" />
   </ItemGroup>
 </Project>
