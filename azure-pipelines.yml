@@ -68,7 +68,9 @@ stages:
     parameters:
       Environment: AT
       SolutionBaseName: $(SolutionBaseName)
+      DACPACSolutionBaseName: $(DACPACSolutionBaseName)
       ServiceConnection: SFA-DAS-DevTest-ARM
+      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
 
 # - stage: Deploy_TEST
 #   dependsOn: Build
