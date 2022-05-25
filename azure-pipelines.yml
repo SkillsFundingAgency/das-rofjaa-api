@@ -14,7 +14,7 @@ variables:
 - name: SolutionBaseName
   value: SFA.DAS.Rofjaa.Api
 - name: DACPACSolutionBaseName
-    value: SFA.DAS.Rofjaa.Database
+  value: SFA.DAS.Rofjaa.Database
 - name: BuildConfiguration
   value: release
 - name: BuildPlatform
