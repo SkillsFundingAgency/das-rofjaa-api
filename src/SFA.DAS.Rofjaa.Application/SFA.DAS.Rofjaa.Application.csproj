@@ -4,10 +4,22 @@
     <ProjectGuid>9817A4FE-9D15-4C14-B798-D5717E70CCC1</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
+ <PackageReference Include="MediatR" Version="8.0.2" />
+
+    
     <PackageReference Include="MediatR" Version="8.0.2" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.6.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Polly" Version="7.2.2" />
+    <PackageReference Include="SFA.DAS.NServiceBus" Version="16.0.21" />
+    <PackageReference Include="SFA.DAS.NServiceBus.SqlServer" Version="16.0.21" />
+    <PackageReference Include="SFA.DAS.UnitOfWork.NServiceBus" Version="9.0.28" />    
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SFA.DAS.Rofjaa.Domain\SFA.DAS.Rofjaa.Domain.csproj" />
+    <ProjectReference Include="..\SFA.DAS.Rofjaa.Data\SFA.DAS.Rofjaa.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Agencies\Handlers\" />
@@ -16,3 +28,4 @@
     <Folder Include="Agencies\Handlers\" />
   </ItemGroup>
 </Project>
+

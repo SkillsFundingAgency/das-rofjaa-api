@@ -26,24 +26,27 @@ namespace SFA.DAS.Rofjaa.Api.Controllers
         {
             var result = await _mediator.Send(new GetAgencyQuery { LegalIdentityId = id });
 
-            if (result.Agency == null) return NotFound();
+            if (result == null) return NotFound();
 
-            var response = (GetAgencyResponse)result.Agency;
+            var response = (GetAgencyResponse)result;
 
             return Ok(response);
+
         }
 
         [HttpGet]
         public async Task<IActionResult> GetList()
         {
-            var queryResult = await _mediator.Send(new GetAgenciesQuery());
+
+            var result = await _mediator.Send(new GetAgenciesQuery());
 
             var response = new GetAgenciesResponse
             {
-                Agencies = queryResult.Agency.Select(agency => (GetAgencyResponse)agency),
+                Agencies = result.Items.Select(x => (GetAgenciesResponse.Agency)x)
             };
 
             return Ok(response);
+
         }
     }
 }

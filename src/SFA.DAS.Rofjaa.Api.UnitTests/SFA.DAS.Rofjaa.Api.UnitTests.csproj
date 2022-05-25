@@ -22,12 +22,6 @@
     <ProjectReference Include="..\SFA.DAS.Rofjaa.Domain\SFA.DAS.Rofjaa.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Infrastructure\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Remove="Infrastructure\WhenAddingAuthorizeFilterRoles.cs" />
   </ItemGroup>
 </Project>

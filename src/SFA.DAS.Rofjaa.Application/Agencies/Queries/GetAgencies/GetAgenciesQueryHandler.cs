@@ -1,28 +1,47 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using SFA.DAS.Rofjaa.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using SFA.DAS.Rofjaa.Data;
 
 namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies
 {
-    public class GetAgenciesQueryHandler : IRequestHandler<GetAgenciesQuery, GetAgencyResult>
+    public class GetAgenciesQueryHandler : IRequestHandler<GetAgenciesQuery, GetAgenciesResult>
     {
-        private readonly IAgencyService _agencyService;
+        private readonly RofjaaDataContext _rofjaaDataContext;
 
-        public GetAgenciesQueryHandler (IAgencyService agencyService)
+        public GetAgenciesQueryHandler(RofjaaDataContext rofjaaDataContext)
         {
-            _agencyService = agencyService;
+            _rofjaaDataContext = rofjaaDataContext;
         }
-        
-        public async Task<GetAgencyResult> Handle(GetAgenciesQuery request, CancellationToken cancellationToken)
+
+        public async Task<GetAgenciesResult> Handle(GetAgenciesQuery request, CancellationToken cancellationToken)
         {
-            var agencies = await _agencyService.GetAgencies();
-            
-            return new GetAgencyResult
+            var agenciesQuery = _rofjaaDataContext.Agency
+                .AsQueryable();
+
+            var agencies = await agenciesQuery
+                .Select(x => new GetAgenciesResult.Agency
+                {
+                    LegalIdentityId = x.LegalIdentityId,
+                    Grant = x.Grant
+                })
+                .AsNoTracking()
+                .AsSingleQuery()
+                .ToListAsync(cancellationToken);
+
+            if (agencies == null)
             {
-                Agency = agencies
-            }; 
-                
+                return null;
+            }
+
+            var result = new GetAgenciesResult
+            {
+                Items = agencies
+            };
+
+            return result;
         }
     }
 }

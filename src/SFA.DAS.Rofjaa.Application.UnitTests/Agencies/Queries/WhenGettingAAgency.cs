@@ -10,22 +10,22 @@ using SFA.DAS.Testing.AutoFixture;
 
 namespace SFA.DAS.Rofjaa.Application.UnitTests.Agency.Queries
 {
-    public class WhenGettingAFramework
+    public class WhenGettingAAgency
     {
         [Test, MoqAutoData]
-        public async Task Then_Gets_Framework_From_Service(
+        public async Task Then_Gets_Agency_From_Service(
             GetAgencyQuery query,
             SFA.DAS.Rofjaa.Domain.Entities.Agency agencyFromService,
-            [Frozen] Mock<IAgencyService> mockFrameworksService,
+            [Frozen] Mock<IAgencyRepository> mockFrameworksService,
             GetAgencyQueryHandler handler)
         {
             mockFrameworksService
-                .Setup(service => service.GetAgency(query.LegalIdentityId))
+                .Setup(service => service.Get(query.LegalIdentityId))
                 .ReturnsAsync(agencyFromService);
 
             var result = await handler.Handle(query, CancellationToken.None);
 
-            result.Agency.Should().BeEquivalentTo(agencyFromService);
+            result.Should().BeEquivalentTo(agencyFromService);
         }
     }
 }

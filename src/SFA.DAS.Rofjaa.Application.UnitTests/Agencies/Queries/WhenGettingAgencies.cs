@@ -26,7 +26,7 @@ namespace SFA.DAS.Rofjaa.Application.UnitTests.Agencies.Queries
 
             var result = await handler.Handle(query, CancellationToken.None);
 
-            result.Agency.Should().BeEquivalentTo(agencyFromService);
+            result.Should().BeEquivalentTo(agencyFromService);
         }
     }
 }
