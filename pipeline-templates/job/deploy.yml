@@ -3,6 +3,7 @@ parameters:
   SolutionBaseName:
   Environment:
   OverrideBlockOnPossibleDataLoss:
+  DACPACSolutionBaseName:
 
 jobs:
 - deployment: DeployWebApp
@@ -52,7 +53,7 @@ jobs:
             ServerName: $(SharedSQLServerFQDN)
             SqlUsername: $(SharedSQLServerUsername)
             SqlPassword: $(SharedSQLServerPassword)
-            DacpacFile: $(Pipeline.Workspace)/DacpacArtifact/src/${{ parameters.SolutionBaseName }}/bin/Output/${{ parameters.SolutionBaseName }}.dacpac
+            DacpacFile: $(Pipeline.Workspace)/DacpacArtifact/src/${{ parameters.DACPACSolutionBaseName }}/bin/Output/${{ parameters.DACPACSolutionBaseName }}.dacpac
             DatabaseName: $(DatabaseName)
             OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
             Environment: ${{ parameters.Environment }}
