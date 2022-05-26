@@ -7,9 +7,9 @@ using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency;
 using SFA.DAS.Rofjaa.UnitTests.DataFixture;
 using static SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies.GetAgenciesResult;
 
-namespace SFA.DAS.Rofjaa.UnitTests.Application.Queries.GetPledge
+namespace SFA.DAS.Rofjaa.UnitTests.Application.Queries.GetAgency
 {
-    public class GetAgencyQueryHandlerTests :RofjaaDbContextFixture
+    public class GetAgencyQueryHandlerTests : RofjaaDbContextFixture
     {
         private readonly Fixture _fixture = new Fixture();
 

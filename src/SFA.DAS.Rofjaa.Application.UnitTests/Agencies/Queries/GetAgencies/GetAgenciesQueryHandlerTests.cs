@@ -9,7 +9,7 @@ using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies;
 using SFA.DAS.Rofjaa.UnitTests.DataFixture;
 using static SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies.GetAgenciesResult;
 
-namespace SFA.DAS.Rofjaa.UnitTests.Application.Queries.GetPledges
+namespace SFA.DAS.Rofjaa.UnitTests.Application.Queries.GetAgencies
 {
     [TestFixture]
     public class GetAgenciesQueryHandlerTests : RofjaaDbContextFixture
