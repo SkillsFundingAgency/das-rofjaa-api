@@ -31,7 +31,7 @@ resources:
   - repository: das-platform-building-blocks
     type: github
     name: SkillsFundingAgency/das-platform-building-blocks
-    ref: refs/tags/0.4.50
+    ref: refs/head/web_app_deploy_test
     endpoint: SkillsFundingAgency
   - repository: das-platform-automation
     type: github
@@ -55,7 +55,7 @@ stages:
     parameters:
       SolutionBaseName: $(DACPACSolutionBaseName)
       SqlProjectPath: src/$(DACPACSolutionBaseName)/$(DACPACSolutionBaseName).sqlproj
-    
+
 - stage: Deploy_AT
   dependsOn: Build
   displayName: Deploy to AT
