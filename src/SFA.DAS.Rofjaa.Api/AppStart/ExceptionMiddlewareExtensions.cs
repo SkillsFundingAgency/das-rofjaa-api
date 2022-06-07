@@ -11,8 +11,7 @@ namespace SFA.DAS.Rofjaa.Api.AppStart
         {
             app.UseExceptionHandler(appError =>
             {
-                appError.Run(async context =>
-                {
+                appError.Run(context => {
                     context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                     context.Response.ContentType = "application/json";
                     var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
@@ -20,6 +19,8 @@ namespace SFA.DAS.Rofjaa.Api.AppStart
                     {
                         logger.LogError(contextFeature.Error, $"Unexpected error occurred");
                     }
+
+                    return System.Threading.Tasks.Task.CompletedTask;
                 });
             });
         }

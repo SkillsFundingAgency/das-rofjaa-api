@@ -127,8 +127,6 @@ namespace SFA.DAS.Rofjaa.Api
             services.AddApiVersioning(opt => {
                 opt.ApiVersionReader = new HeaderApiVersionReader("X-Version");
             });
-
-            //services.AddLogging(logging => );
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
