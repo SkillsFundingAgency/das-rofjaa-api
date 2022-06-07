@@ -37,9 +37,11 @@ namespace SFA.DAS.Rofjaa.Api.UnitTests.Controllers
             // Arrange
             var id = _fixture.Create<int>();
 
-            //_mockMediator
-            //    .Setup(x => x.Send(It.Is<GetAgenciesQuery>(x => x != null), It.IsAny<CancellationToken>()))
-           //     .ReturnsAsync(result);
+            var result = new GetAgenciesResult();
+
+            _mockMediator
+               .Setup(x => x.Send(It.Is<GetAgenciesQuery>(x => x != null), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(result);
 
             // Act
             var actionResult = await _agenciesController.Get(id);
