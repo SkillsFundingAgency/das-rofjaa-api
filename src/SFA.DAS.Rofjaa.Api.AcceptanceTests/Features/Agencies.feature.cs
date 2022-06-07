@@ -105,7 +105,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I have an http client", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 8
- testRunner.When("I GET the following url: api/agencies/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I GET the following url: agencies/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 9
  testRunner.Then("an http status code of 200 is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -148,7 +148,7 @@ this.ScenarioInitialize(scenarioInfo);
     testRunner.Given("I have an http client", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 14
-    testRunner.When("I GET the following url: api/agencies/1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.When("I GET the following url: agencies/1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 15
     testRunner.Then("an http status code of 200 is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -191,7 +191,7 @@ this.ScenarioInitialize(scenarioInfo);
     testRunner.Given("I have an http client", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 20
-    testRunner.When("I GET the following url: api/agencies/100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.When("I GET the following url: agencies/100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 21
     testRunner.Then("an http status code of 404 is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

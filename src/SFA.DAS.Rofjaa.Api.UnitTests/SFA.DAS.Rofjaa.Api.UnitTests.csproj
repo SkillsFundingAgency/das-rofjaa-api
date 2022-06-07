@@ -25,7 +25,6 @@
   <ItemGroup>
     <Compile Remove="Infrastructure\WhenAddingAuthorizeFilterRoles.cs" />
     <Compile Remove="Data\ValueConversionExtensionsTests.cs" />
-    <Compile Remove="Data\RofjaaDataContextTests.cs" />
     <Compile Remove="Api\ProgramTests.cs" />
     <Compile Remove="Api\RoleNamesTests.cs" />
     <Compile Remove="Api\StartupTests.cs" />
