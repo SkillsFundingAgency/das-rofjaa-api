@@ -22,7 +22,7 @@ namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Infrastructure
                 {
                     new KeyValuePair<string, string>("ConfigurationStorageConnectionString", "UseDevelopmentStorage=true;"),
                     new KeyValuePair<string, string>("ConfigNames", "SFA.DAS.Rofjaa.Api"),
-                    new KeyValuePair<string, string>("Environment", "DEV"),
+                    new KeyValuePair<string, string>("EnvironmentName", "DEV"),
                     new KeyValuePair<string, string>("Version", "1.0")
                 });
             });

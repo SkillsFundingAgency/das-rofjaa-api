@@ -39,7 +39,7 @@ namespace SFA.DAS.Rofjaa.Api
                 .AddEnvironmentVariables();
 
 
-            if (!configuration["Environment"].Equals("DEV", StringComparison.CurrentCultureIgnoreCase))
+            if (!configuration["EnvironmentName"].Equals("DEV", StringComparison.CurrentCultureIgnoreCase))
             {
 
 #if DEBUG
@@ -52,7 +52,7 @@ namespace SFA.DAS.Rofjaa.Api
                     {
                         options.ConfigurationKeys = configuration["ConfigNames"].Split(",");
                         options.StorageConnectionString = configuration["ConfigurationStorageConnectionString"];
-                        options.EnvironmentName = configuration["Environment"];
+                        options.EnvironmentName = configuration["EnvironmentName"];
                         options.PreFixConfigurationKeys = false;
                     }
                 );
@@ -89,7 +89,7 @@ namespace SFA.DAS.Rofjaa.Api
                 services.AddAuthentication(azureAdConfiguration, policies);
             }
 
-            if (_configuration["Environment"] != "DEV")
+            if (_configuration["EnvironmentName"] != "DEV")
             {
                 services.AddHealthChecks()
                     .AddDbContextCheck<RofjaaDataContext>();
@@ -100,7 +100,7 @@ namespace SFA.DAS.Rofjaa.Api
 
             services.AddServiceRegistration();
 
-            services.AddDatabaseRegistration(rofjaaConfiguration, _configuration["Environment"]);
+            services.AddDatabaseRegistration(rofjaaConfiguration, _configuration["EnvironmentName"]);
 
             services
                 .AddMvc(o =>
@@ -152,7 +152,7 @@ namespace SFA.DAS.Rofjaa.Api
 
             app.UseAuthentication();
 
-            if (!_configuration["Environment"].Equals("DEV", StringComparison.CurrentCultureIgnoreCase))
+            if (!_configuration["EnvironmentName"].Equals("DEV", StringComparison.CurrentCultureIgnoreCase))
             {
                 app.UseHealthChecks();
             }
@@ -168,8 +168,8 @@ namespace SFA.DAS.Rofjaa.Api
 
         private bool ConfigurationIsLocalOrDev()
         {
-            return _configuration["Environment"].Equals("LOCAL", StringComparison.CurrentCultureIgnoreCase) ||
-                   _configuration["Environment"].Equals("DEV", StringComparison.CurrentCultureIgnoreCase);
+            return _configuration["EnvironmentName"].Equals("LOCAL", StringComparison.CurrentCultureIgnoreCase) ||
+                   _configuration["EnvironmentName"].Equals("DEV", StringComparison.CurrentCultureIgnoreCase);
         }
     }
 }
