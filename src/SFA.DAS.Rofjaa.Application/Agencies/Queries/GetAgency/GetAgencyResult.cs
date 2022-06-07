@@ -5,6 +5,6 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency
     public class GetAgencyResult
     {
         public int LegalIdentityId { get; set; }
-        public bool Grant { get; set; }
+        public bool IsGrantFunded { get; set; }
     }
 }

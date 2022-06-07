@@ -9,7 +9,7 @@ namespace SFA.DAS.Rofjaa.Data.Configuration
         {
             builder.ToTable("Agency");
             builder.HasKey(x=>x.LegalIdentityId);
-            builder.Property(x => x.Grant).HasColumnName("Grant").HasColumnType("bit").IsRequired();
+            builder.Property(x => x.IsGrantFunded).HasColumnName("IsGrantFunded").HasColumnType("bit").IsRequired();
             builder.HasIndex(x => x.LegalIdentityId).IsUnique();
         }
     }

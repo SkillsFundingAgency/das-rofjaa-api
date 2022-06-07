@@ -31,7 +31,7 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency
             var result = new GetAgencyResult
             {
                 LegalIdentityId = agency.LegalIdentityId,
-                Grant = agency.Grant
+                IsGrantFunded = agency.IsGrantFunded
             };
 
             return result;

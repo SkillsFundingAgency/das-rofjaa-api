@@ -6,7 +6,7 @@ namespace SFA.DAS.Rofjaa.Api.ApiResponses
     public class GetAgencyResponse
     {
         public int LegalIdentityId { get; set; }
-        public bool Grant { get; set; }
+        public bool IsGrantFunded { get; set; }
 
 
         public static implicit operator GetAgencyResponse(GetAgencyResult source)
@@ -14,7 +14,7 @@ namespace SFA.DAS.Rofjaa.Api.ApiResponses
             return new GetAgencyResponse
             {
                 LegalIdentityId = source.LegalIdentityId,
-                Grant = source.Grant
+                IsGrantFunded = source.IsGrantFunded
             };
         }
     }

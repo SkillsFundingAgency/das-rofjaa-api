@@ -83,8 +83,7 @@ namespace SFA.DAS.Rofjaa.Api.UnitTests.Controllers
 
             var result = new GetAgenciesResult()
             {
-                Items = expectedAgencies.ToList(),
-                TotalItems = expectedAgencies.Count(),
+                Items = expectedAgencies.ToList()
             };
 
             _mockMediator

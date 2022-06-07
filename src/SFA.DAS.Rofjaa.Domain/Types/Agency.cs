@@ -9,8 +9,8 @@ namespace SFA.DAS.Rofjaa.Domain.Types
         [JsonProperty("LegalIdentityId")]
         public int LegalIdentityId { get; set; }
 
-        [JsonProperty("Grant")]
-        public bool Grant { get; set; }
+        [JsonProperty("IsGrantFunded")]
+        public bool IsGrantFunded { get; set; }
         
     }
 }

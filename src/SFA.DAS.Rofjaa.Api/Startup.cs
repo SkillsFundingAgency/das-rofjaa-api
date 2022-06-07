@@ -21,9 +21,8 @@ using SFA.DAS.Configuration.AzureTableStorage;
 using SFA.DAS.Rofjaa.Api.AppStart;
 using SFA.DAS.Rofjaa.Api.Infrastructure;
 using SFA.DAS.Rofjaa.Domain.Configuration;
-using SFA.DAS.Rofjaa.Application.Agencies.Handlers;
 using SFA.DAS.Rofjaa.Data;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
+using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency;
 
 namespace SFA.DAS.Rofjaa.Api
 {
@@ -96,7 +95,7 @@ namespace SFA.DAS.Rofjaa.Api
 
             }
 
-            services.AddMediatR(typeof(AgencyCommand).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(GetAgencyResult).GetTypeInfo().Assembly);
 
             services.AddServiceRegistration();
 
@@ -129,7 +128,7 @@ namespace SFA.DAS.Rofjaa.Api
                 opt.ApiVersionReader = new HeaderApiVersionReader("X-Version");
             });
 
-            services.AddLogging();
+            //services.AddLogging(logging => );
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)

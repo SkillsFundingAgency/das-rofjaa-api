@@ -26,12 +26,12 @@ namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Infrastructure
                 new Agency
                 {
                     LegalIdentityId = 1,
-                    Grant = true
+                    IsGrantFunded = true
                 },
                 new Agency
                 {
                     LegalIdentityId = 2,
-                    Grant = false
+                    IsGrantFunded = false
                 },
             };
         }

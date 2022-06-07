@@ -21,10 +21,10 @@ namespace SFA.DAS.Rofjaa.Api.Controllers
         }
             
         [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [Route("{legalIdentityId}")]
+        public async Task<IActionResult> Get(int legalIdentityId)
         {
-            var result = await _mediator.Send(new GetAgencyQuery { LegalIdentityId = id });
+            var result = await _mediator.Send(new GetAgencyQuery { LegalIdentityId = legalIdentityId });
 
             if (result == null) return NotFound();
 

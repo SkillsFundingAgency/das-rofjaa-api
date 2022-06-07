@@ -25,16 +25,11 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies
                 .Select(x => new GetAgenciesResult.Agency
                 {
                     LegalIdentityId = x.LegalIdentityId,
-                    Grant = x.Grant
+                    IsGrantFunded = x.IsGrantFunded
                 })
                 .AsNoTracking()
                 .AsSingleQuery()
                 .ToListAsync(cancellationToken);
-
-            if (agencies == null)
-            {
-                return null;
-            }
 
             var result = new GetAgenciesResult
             {

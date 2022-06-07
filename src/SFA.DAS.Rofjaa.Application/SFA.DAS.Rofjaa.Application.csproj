@@ -21,11 +21,5 @@
     <ProjectReference Include="..\SFA.DAS.Rofjaa.Domain\SFA.DAS.Rofjaa.Domain.csproj" />
     <ProjectReference Include="..\SFA.DAS.Rofjaa.Data\SFA.DAS.Rofjaa.Data.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Remove="Agencies\Handlers\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Agencies\Handlers\" />
-  </ItemGroup>
 </Project>
 
