@@ -10,14 +10,14 @@ namespace SFA.DAS.Rofjaa.Api.ApiResponses
 
         public class Agency
         {
-            public int LegalIdentityId { get; set; }
+            public int LegalEntityId { get; set; }
             public bool IsGrantFunded { get; set; }
 
             public static implicit operator Agency(GetAgenciesResult.Agency agency)
             {
                 return new Agency()
                 {
-                    LegalIdentityId = agency.LegalIdentityId,
+                    LegalEntityId = agency.LegalEntityId,
                     IsGrantFunded = agency.IsGrantFunded
                 };
             }

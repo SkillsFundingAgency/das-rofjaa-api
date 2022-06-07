@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace SFA.DAS.Rofjaa.Api.UnitTests.Controllers
 {
     [TestFixture]
-    public class PledgesControllerTests
+    public class AgenciesControllerTests
     {
         private Fixture _fixture;
         private Mock<IMediator> _mockMediator;
@@ -29,29 +29,7 @@ namespace SFA.DAS.Rofjaa.Api.UnitTests.Controllers
             _agenciesController = new AgenciesController(_mockMediator.Object);
         }
 
-        [Test]
-        public async Task GET_Agency_Returns_Requested_Record()
-        {
-            // Arrange
-            var id = _fixture.Create<int>();
-            var agencyResult = _fixture.Create<GetAgencyResult>();
-
-            _mockMediator
-                .Setup(x => x.Send(It.Is<GetAgencyQuery>(x => x.LegalIdentityId == id), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(agencyResult);
-
-            // Act
-            var actionResult = await _agenciesController.Get(id);
-            var okObjectResult = actionResult as OkObjectResult;
-            var getAgencyResponse = okObjectResult.Value as GetAgencyResponse;
-
-            // Assert
-            Assert.IsNotNull(actionResult);
-            Assert.IsNotNull(okObjectResult);
-            Assert.IsNotNull(getAgencyResponse);
-            Assert.AreEqual(okObjectResult.StatusCode, (int)HttpStatusCode.OK);
-            Assert.AreEqual(getAgencyResponse.LegalIdentityId, agencyResult.LegalIdentityId);
-        }
+       
 
         [Test]
         public async Task GET_Agency_Requested_Doesnt_Exist_NotFound_Returned()
@@ -59,9 +37,9 @@ namespace SFA.DAS.Rofjaa.Api.UnitTests.Controllers
             // Arrange
             var id = _fixture.Create<int>();
 
-            _mockMediator
-                .Setup(x => x.Send(It.Is<GetAgencyQuery>(x => x.LegalIdentityId == id), It.IsAny<CancellationToken>()))
-                .ReturnsAsync((GetAgencyResult)null);
+            //_mockMediator
+            //    .Setup(x => x.Send(It.Is<GetAgenciesQuery>(x => x != null), It.IsAny<CancellationToken>()))
+           //     .ReturnsAsync(result);
 
             // Act
             var actionResult = await _agenciesController.Get(id);

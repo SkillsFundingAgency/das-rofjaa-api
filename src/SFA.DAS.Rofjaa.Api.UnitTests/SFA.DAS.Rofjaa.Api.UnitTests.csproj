@@ -15,6 +15,7 @@
     <PackageReference Include="SFA.DAS.Api.Common" Version="1.0.11" />
     <PackageReference Include="SFA.DAS.Testing.AutoFixture" Version="3.0.169" />
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
+    <PackageReference Include="NSubstitute" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SFA.DAS.Rofjaa.Api\SFA.DAS.Rofjaa.Api.csproj" />
@@ -23,5 +24,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Infrastructure\WhenAddingAuthorizeFilterRoles.cs" />
+    <Compile Remove="Data\ValueConversionExtensionsTests.cs" />
+    <Compile Remove="Data\RofjaaDataContextTests.cs" />
+    <Compile Remove="Api\ProgramTests.cs" />
+    <Compile Remove="Api\RoleNamesTests.cs" />
+    <Compile Remove="Api\StartupTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="NSubstitute" />
   </ItemGroup>
 </Project>

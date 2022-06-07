@@ -24,7 +24,7 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies
             var agencies = await agenciesQuery
                 .Select(x => new GetAgenciesResult.Agency
                 {
-                    LegalIdentityId = x.LegalIdentityId,
+                    LegalEntityId = x.LegalEntityId,
                     IsGrantFunded = x.IsGrantFunded
                 })
                 .AsNoTracking()

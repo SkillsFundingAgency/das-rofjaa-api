@@ -24,11 +24,11 @@ namespace SFA.DAS.Rofjaa.Data.UnitTests.Repository.AgencyRepository
             {
                 new Agency()
                 {
-                    LegalIdentityId = 2
+                    LegalEntityId = 2
                 },
                 new Agency
                 {
-                    LegalIdentityId = ExpectedAgencyId
+                    LegalEntityId = ExpectedAgencyId
                 }
             };
 
@@ -46,7 +46,7 @@ namespace SFA.DAS.Rofjaa.Data.UnitTests.Repository.AgencyRepository
             
             //Assert
             Assert.IsNotNull(agency);
-            agency.Should().BeEquivalentTo(_agencies.SingleOrDefault(c=>c.LegalIdentityId.Equals(ExpectedAgencyId)));
+            agency.Should().BeEquivalentTo(_agencies.SingleOrDefault(c=>c.LegalEntityId.Equals(ExpectedAgencyId)));
         }
     }
 }

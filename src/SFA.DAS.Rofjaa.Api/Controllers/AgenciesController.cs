@@ -10,7 +10,7 @@ namespace SFA.DAS.Rofjaa.Api.Controllers
 {
     [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/agencies/")]
+    [Route("agencies/")]
     public class AgenciesController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -21,10 +21,10 @@ namespace SFA.DAS.Rofjaa.Api.Controllers
         }
             
         [HttpGet]
-        [Route("{legalIdentityId}")]
-        public async Task<IActionResult> Get(int legalIdentityId)
+        [Route("{legalEntityId}")]
+        public async Task<IActionResult> Get(int legalEntityId)
         {
-            var result = await _mediator.Send(new GetAgencyQuery { LegalIdentityId = legalIdentityId });
+            var result = await _mediator.Send(new GetAgencyQuery { LegalEntityId = legalEntityId });
 
             if (result == null) return NotFound();
 

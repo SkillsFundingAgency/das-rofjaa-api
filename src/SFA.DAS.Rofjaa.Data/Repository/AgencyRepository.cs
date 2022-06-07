@@ -31,7 +31,7 @@ namespace SFA.DAS.Rofjaa.Data.Repository
         {
             var agency = await _rofjaaDataContext
                 .Agency
-                .SingleOrDefaultAsync(c=>c.LegalIdentityId.Equals(id));
+                .SingleOrDefaultAsync(c=>c.LegalEntityId.Equals(id));
             return agency;
         }
 

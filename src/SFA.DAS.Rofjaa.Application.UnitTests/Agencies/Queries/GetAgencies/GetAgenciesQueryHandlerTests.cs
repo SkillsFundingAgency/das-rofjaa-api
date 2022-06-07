@@ -23,8 +23,8 @@ namespace SFA.DAS.Rofjaa.UnitTests.Application.Queries.GetAgencies
 
             var agencies = new List<Domain.Entities.Agency>();
 
-            agencies.Add(new Domain.Entities.Agency() { LegalIdentityId = 1, IsGrantFunded = false });
-            agencies.Add(new Domain.Entities.Agency() { LegalIdentityId = 2, IsGrantFunded = false });
+            agencies.Add(new Domain.Entities.Agency() { LegalEntityId = 1, IsGrantFunded = false });
+            agencies.Add(new Domain.Entities.Agency() { LegalEntityId = 2, IsGrantFunded = false });
 
             await DbContext.Agency.AddRangeAsync(agencies);
             await DbContext.SaveChangesAsync();

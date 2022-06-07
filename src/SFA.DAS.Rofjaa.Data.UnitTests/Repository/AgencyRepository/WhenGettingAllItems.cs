@@ -21,11 +21,11 @@ namespace SFA.DAS.Rofjaa.Data.UnitTests.Repository.AgencyRepository
             {
                 new Agency
                 {
-                    LegalIdentityId = 1
+                    LegalEntityId = 1
                 },
                 new Agency
                 {
-                    LegalIdentityId = 2
+                    LegalEntityId = 2
                 }
             };
 

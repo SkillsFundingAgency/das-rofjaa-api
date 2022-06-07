@@ -6,8 +6,8 @@ namespace SFA.DAS.Rofjaa.Domain.Types
 {
     public class Agency
     {
-        [JsonProperty("LegalIdentityId")]
-        public int LegalIdentityId { get; set; }
+        [JsonProperty("LegalEntityId")]
+        public int LegalEntityId { get; set; }
 
         [JsonProperty("IsGrantFunded")]
         public bool IsGrantFunded { get; set; }

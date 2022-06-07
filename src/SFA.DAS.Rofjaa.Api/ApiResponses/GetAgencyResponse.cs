@@ -5,7 +5,7 @@ namespace SFA.DAS.Rofjaa.Api.ApiResponses
 {
     public class GetAgencyResponse
     {
-        public int LegalIdentityId { get; set; }
+        public int LegalEntityId { get; set; }
         public bool IsGrantFunded { get; set; }
 
 
@@ -13,7 +13,7 @@ namespace SFA.DAS.Rofjaa.Api.ApiResponses
         {
             return new GetAgencyResponse
             {
-                LegalIdentityId = source.LegalIdentityId,
+                LegalEntityId = source.LegalEntityId,
                 IsGrantFunded = source.IsGrantFunded
             };
         }

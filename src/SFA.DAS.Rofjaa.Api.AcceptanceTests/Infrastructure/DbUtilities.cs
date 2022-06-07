@@ -25,12 +25,12 @@ namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Infrastructure
             {
                 new Agency
                 {
-                    LegalIdentityId = 1,
+                    LegalEntityId = 1,
                     IsGrantFunded = true
                 },
                 new Agency
                 {
-                    LegalIdentityId = 2,
+                    LegalEntityId = 2,
                     IsGrantFunded = false
                 },
             };
@@ -38,7 +38,7 @@ namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Infrastructure
 
         public static Agency GetAgency(int id)
         {
-            return GetAgencies().FirstOrDefault(c => c.LegalIdentityId.Equals(id));
+            return GetAgencies().FirstOrDefault(c => c.LegalEntityId.Equals(id));
         }
     }
 }
