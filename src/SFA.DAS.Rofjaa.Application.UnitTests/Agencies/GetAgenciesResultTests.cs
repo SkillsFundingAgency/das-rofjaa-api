@@ -1,9 +1,9 @@
-namespace SFA.DAS.Rofjaa.Application.Tests.Agencies.Queries.GetAgencies
-{
-    using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies;
-    using System;
-    using NUnit.Framework;
+using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies;
+using System;
+using NUnit.Framework;
 
+namespace SFA.DAS.Rofjaa.Application.UnitTests.Agencies.Queries.GetAgencies
+{
     [TestFixture]
     public class GetAgenciesResultTests
     {

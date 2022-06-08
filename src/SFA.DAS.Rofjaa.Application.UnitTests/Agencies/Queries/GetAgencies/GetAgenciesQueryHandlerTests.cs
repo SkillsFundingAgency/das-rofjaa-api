@@ -6,10 +6,9 @@ using AutoFixture;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies;
-using SFA.DAS.Rofjaa.UnitTests.DataFixture;
-using static SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies.GetAgenciesResult;
+using SFA.DAS.Rofjaa.Application.UnitTests.DataFixture;
 
-namespace SFA.DAS.Rofjaa.UnitTests.Application.Queries.GetAgencies
+namespace SFA.DAS.Rofjaa.Application.UnitTests.Queries.GetAgencies
 {
     [TestFixture]
     public class GetAgenciesQueryHandlerTests : RofjaaDbContextFixture

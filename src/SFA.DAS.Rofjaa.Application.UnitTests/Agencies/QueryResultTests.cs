@@ -1,11 +1,11 @@
-namespace SFA.DAS.Rofjaa.Application.Tests.Models
-{
-    using SFA.DAS.Rofjaa.Application.Models;
-    using T = System.String;
-    using System;
-    using NUnit.Framework;
-    using System.Collections.Generic;
+using SFA.DAS.Rofjaa.Application.Models;
+using T = System.String;
+using System;
+using NUnit.Framework;
+using System.Collections.Generic;
 
+namespace SFA.DAS.Rofjaa.Application.UnitTests.Models
+{
     [TestFixture]
     public class QueryResult_1Tests
     {

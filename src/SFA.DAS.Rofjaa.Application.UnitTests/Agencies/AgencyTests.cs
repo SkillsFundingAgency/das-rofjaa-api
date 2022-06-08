@@ -1,9 +1,8 @@
-namespace SFA.DAS.Rofjaa.Application.Tests.Models
-{
-    using SFA.DAS.Rofjaa.Application.Models;
-    using System;
-    using NUnit.Framework;
+using SFA.DAS.Rofjaa.Application.Models;
+using NUnit.Framework;
 
+namespace SFA.DAS.Rofjaa.Application.UnitTests.Models
+{
     [TestFixture]
     public class AgencyTests
     {

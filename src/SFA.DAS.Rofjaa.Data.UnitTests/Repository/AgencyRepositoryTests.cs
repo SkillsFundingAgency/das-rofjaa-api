@@ -1,31 +1,25 @@
-namespace SFA.DAS.Rofjaa.Data.Tests.Repository
-{
-    using SFA.DAS.Rofjaa.Data.Repository;
-    using System;
-    using NUnit.Framework;
-    using NSubstitute;
-    using SFA.DAS.Rofjaa.Data;
-    using System.Collections.Generic;
-    using SFA.DAS.Rofjaa.Domain.Entities;
-    using System.Threading.Tasks;
+using NSubstitute;
+using NUnit.Framework;
 
+namespace SFA.DAS.Rofjaa.Data.UnitTests
+{
     [TestFixture]
     public class AgencyRepositoryTests
     {
-        private AgencyRepository _testClass;
+        private Data.Repository.AgencyRepository _testClass;
         private IRofjaaDataContext _rofjaaDataContext;
 
         [SetUp]
         public void SetUp()
         {
             _rofjaaDataContext = Substitute.For<IRofjaaDataContext>();
-            _testClass = new AgencyRepository(_rofjaaDataContext);
+            _testClass = new Data.Repository.AgencyRepository(_rofjaaDataContext);
         }
 
         [Test]
         public void CanConstruct()
         {
-            var instance = new AgencyRepository(_rofjaaDataContext);
+            var instance = new Data.Repository.AgencyRepository(_rofjaaDataContext);
             Assert.That(instance, Is.Not.Null);
         }
     }

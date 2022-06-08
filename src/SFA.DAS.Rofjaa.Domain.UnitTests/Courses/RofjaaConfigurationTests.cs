@@ -1,9 +1,9 @@
-namespace SFA.DAS.Rofjaa.Domain.Tests.Configuration
-{
-    using SFA.DAS.Rofjaa.Domain.Configuration;
-    using System;
-    using NUnit.Framework;
+using SFA.DAS.Rofjaa.Domain.Configuration;
+using System;
+using NUnit.Framework;
 
+namespace SFA.DAS.Rofjaa.Domain.UnitTests.Configuration
+{
     [TestFixture]
     public class RofjaaConfigurationTests
     {

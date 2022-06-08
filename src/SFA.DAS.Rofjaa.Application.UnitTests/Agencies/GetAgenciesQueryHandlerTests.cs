@@ -1,12 +1,12 @@
-namespace SFA.DAS.Rofjaa.Application.Tests.Agencies.Queries.GetAgencies
-{
-    using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies;
-    using System;
-    using NUnit.Framework;
-    using SFA.DAS.Rofjaa.Data;
-    using System.Threading;
-    using System.Threading.Tasks;
+using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies;
+using System;
+using NUnit.Framework;
+using SFA.DAS.Rofjaa.Data;
+using System.Threading;
+using System.Threading.Tasks;
 
+namespace SFA.DAS.Rofjaa.Application.UnitTests.Agencies.Queries.GetAgencies
+{
     [TestFixture]
     public class GetAgenciesQueryHandlerTests
     {

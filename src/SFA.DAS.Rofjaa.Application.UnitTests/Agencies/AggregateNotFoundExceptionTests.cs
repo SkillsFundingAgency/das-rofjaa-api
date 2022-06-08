@@ -1,10 +1,10 @@
-namespace SFA.DAS.Rofjaa.Application.Tests.Abstractions.CustomExceptions
-{
-    using SFA.DAS.Rofjaa.Application.Abstractions.CustomExceptions;
-    using T = System.String;
-    using System;
-    using NUnit.Framework;
+using SFA.DAS.Rofjaa.Application.Abstractions.CustomExceptions;
+using T = System.String;
+using System;
+using NUnit.Framework;
 
+namespace SFA.DAS.Rofjaa.Application.UnitTests.Abstractions.CustomExceptions
+{
     [TestFixture]
     public class AggregateNotFoundException_1Tests
     {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using SFA.DAS.Rofjaa.Data;
 
-namespace SFA.DAS.Rofjaa.UnitTests.DataFixture
+namespace SFA.DAS.Rofjaa.Application.UnitTests.DataFixture
 {
     public class RofjaaDbContextFixture
     {
