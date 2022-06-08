@@ -81,8 +81,7 @@ namespace SFA.DAS.Rofjaa.Api
 
                 var policies = new Dictionary<string, string>
                 {
-                    {PolicyNames.Default, RoleNames.Default},
-                    {PolicyNames.DataLoad, RoleNames.DataLoad}
+                    {PolicyNames.Default, RoleNames.Default}
                 };
 
                 services.AddAuthentication(azureAdConfiguration, policies);

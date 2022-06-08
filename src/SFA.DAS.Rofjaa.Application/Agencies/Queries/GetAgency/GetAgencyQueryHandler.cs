@@ -23,11 +23,6 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency
 
             var agency = await agencyQuery.SingleOrDefaultAsync(cancellationToken: cancellationToken);
 
-            if (agency == null)
-            {
-                return null;
-            }
-
             var result = new GetAgencyResult
             {
                 LegalEntityId = agency.LegalEntityId,

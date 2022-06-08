@@ -15,18 +15,6 @@ namespace SFA.DAS.Rofjaa.Data.Repository
             _rofjaaDataContext = rofjaaDataContext;
         }
 
-        public async Task InsertMany(IEnumerable<Agency> agencies)
-        {
-            await _rofjaaDataContext.Agency.AddRangeAsync(agencies);
-            _rofjaaDataContext.SaveChanges();
-        }
-
-        public void DeleteAll()
-        {
-            _rofjaaDataContext.Agency.RemoveRange(_rofjaaDataContext.Agency);
-            _rofjaaDataContext.SaveChanges();
-        }
-
         public async Task<Agency> Get(int id)
         {
             var agency = await _rofjaaDataContext

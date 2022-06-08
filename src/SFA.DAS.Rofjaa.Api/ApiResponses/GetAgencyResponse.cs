@@ -8,7 +8,6 @@ namespace SFA.DAS.Rofjaa.Api.ApiResponses
         public int LegalEntityId { get; set; }
         public bool IsGrantFunded { get; set; }
 
-
         public static implicit operator GetAgencyResponse(GetAgencyResult source)
         {
             return new GetAgencyResponse

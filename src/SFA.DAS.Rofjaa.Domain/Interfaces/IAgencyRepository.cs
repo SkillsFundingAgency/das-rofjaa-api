@@ -6,8 +6,6 @@ namespace SFA.DAS.Rofjaa.Domain.Interfaces
 {
     public interface IAgencyRepository
     {
-        Task InsertMany(IEnumerable<Agency> agencies);
-        void DeleteAll();
         Task<Agency> Get(int id);
         Task<IEnumerable<Agency>> GetAll();
     }

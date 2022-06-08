@@ -7,7 +7,6 @@ namespace SFA.DAS.Rofjaa.Api.ApiResponses
     {
         public IEnumerable<Agency> Agencies { get; set; }
 
-
         public class Agency
         {
             public int LegalEntityId { get; set; }

@@ -60,13 +60,11 @@ namespace SFA.DAS.Rofjaa.Data
                     TimeSpan.FromSeconds(20),
                     null
                 ));
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Agency());
-
             base.OnModelCreating(modelBuilder);
         }
     }
