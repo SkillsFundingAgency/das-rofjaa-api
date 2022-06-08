@@ -1,4 +1,4 @@
-namespace SFA.DAS.Rofjaa.Api.Tests.AppStart
+namespace SFA.DAS.Rofjaa.Api.UnitTests.AppStart
 {
     using SFA.DAS.Rofjaa.Api.AppStart;
     using System;
@@ -11,12 +11,10 @@ namespace SFA.DAS.Rofjaa.Api.Tests.AppStart
     public static class ExceptionMiddlewareExtensionsTests
     {
 
-
         [Test]
         public static void CannotCallConfigureExceptionHandlerWithNullApp()
         {
             Assert.Throws<ArgumentNullException>(() => default(IApplicationBuilder).ConfigureExceptionHandler(Substitute.For<ILogger>()));
         }
-
     }
 }

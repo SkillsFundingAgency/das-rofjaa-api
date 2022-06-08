@@ -1,4 +1,4 @@
-namespace SFA.DAS.Rofjaa.Api.Tests.ApiResponses
+namespace SFA.DAS.Rofjaa.Api.UnitTests.ApiResponses
 {
     using SFA.DAS.Rofjaa.Api.ApiResponses;
     using System;

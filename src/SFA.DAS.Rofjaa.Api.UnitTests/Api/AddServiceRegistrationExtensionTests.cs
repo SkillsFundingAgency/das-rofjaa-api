@@ -1,4 +1,4 @@
-namespace SFA.DAS.Rofjaa.Api.Tests.AppStart
+namespace SFA.DAS.Rofjaa.Api.UnitTests.AppStart
 {
     using SFA.DAS.Rofjaa.Api.AppStart;
     using System;
@@ -9,7 +9,6 @@ namespace SFA.DAS.Rofjaa.Api.Tests.AppStart
     [TestFixture]
     public static class AddServiceRegistrationExtensionTests
     {
-
         [Test]
         public static void CannotCallAddServiceRegistrationWithNullServices()
         {

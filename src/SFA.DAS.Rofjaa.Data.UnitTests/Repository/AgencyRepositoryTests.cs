@@ -28,6 +28,5 @@ namespace SFA.DAS.Rofjaa.Data.Tests.Repository
             var instance = new AgencyRepository(_rofjaaDataContext);
             Assert.That(instance, Is.Not.Null);
         }
-
     }
 }

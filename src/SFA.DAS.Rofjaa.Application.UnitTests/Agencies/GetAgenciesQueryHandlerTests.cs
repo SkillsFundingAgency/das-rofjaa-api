@@ -1,6 +1,6 @@
-namespace SFA.DAS.Rofjaa.Application.Tests.Agencies.Queries.GetAgency
+namespace SFA.DAS.Rofjaa.Application.Tests.Agencies.Queries.GetAgencies
 {
-    using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency;
+    using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies;
     using System;
     using NUnit.Framework;
     using SFA.DAS.Rofjaa.Data;
@@ -8,25 +8,23 @@ namespace SFA.DAS.Rofjaa.Application.Tests.Agencies.Queries.GetAgency
     using System.Threading.Tasks;
 
     [TestFixture]
-    public class GetAgencyQueryHandlerTests
+    public class GetAgenciesQueryHandlerTests
     {
-        private GetAgencyQueryHandler _testClass;
+        private GetAgenciesQueryHandler _testClass;
         private RofjaaDataContext _rofjaaDataContext;
 
         [SetUp]
         public void SetUp()
         {
             _rofjaaDataContext = new RofjaaDataContext();
-            _testClass = new GetAgencyQueryHandler(_rofjaaDataContext);
+            _testClass = new GetAgenciesQueryHandler(_rofjaaDataContext);
         }
 
         [Test]
         public void CanConstruct()
         {
-            var instance = new GetAgencyQueryHandler(_rofjaaDataContext);
+            var instance = new GetAgenciesQueryHandler(_rofjaaDataContext);
             Assert.That(instance, Is.Not.Null);
         }
-
-      
     }
 }
