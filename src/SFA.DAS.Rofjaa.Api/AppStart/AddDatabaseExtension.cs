@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,6 +8,7 @@ using SFA.DAS.Rofjaa.Domain.Configuration;
 
 namespace SFA.DAS.Rofjaa.Api.AppStart
 {
+    [ExcludeFromCodeCoverage]
     public static class AddDatabaseExtension
     {
         public static void AddDatabaseRegistration(this IServiceCollection services, RofjaaConfiguration config, string environmentName)
