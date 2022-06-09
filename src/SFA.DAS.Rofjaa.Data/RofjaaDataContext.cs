@@ -10,7 +10,6 @@ using SFA.DAS.Rofjaa.Domain.Configuration;
 
 namespace SFA.DAS.Rofjaa.Data
 {
-    [ExcludeFromCodeCoverage]
     public interface IRofjaaDataContext
     {
         DbSet<Domain.Entities.Agency> Agency { get; set; }
