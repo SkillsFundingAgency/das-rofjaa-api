@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -9,13 +10,15 @@ using SFA.DAS.Rofjaa.Domain.Configuration;
 
 namespace SFA.DAS.Rofjaa.Data
 {
+    [ExcludeFromCodeCoverage]
     public interface IRofjaaDataContext
     {
         DbSet<Domain.Entities.Agency> Agency { get; set; }
     
         int SaveChanges();
     }
-    
+
+    [ExcludeFromCodeCoverage]
     public partial class RofjaaDataContext : DbContext, IRofjaaDataContext
     {
         private const string AzureResource = "https://database.windows.net/";

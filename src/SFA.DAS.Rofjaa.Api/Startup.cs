@@ -23,9 +23,11 @@ using SFA.DAS.Rofjaa.Api.Infrastructure;
 using SFA.DAS.Rofjaa.Domain.Configuration;
 using SFA.DAS.Rofjaa.Data;
 using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency;
+using System.Diagnostics.CodeAnalysis;
 
 namespace SFA.DAS.Rofjaa.Api
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         private readonly IConfiguration _configuration;
