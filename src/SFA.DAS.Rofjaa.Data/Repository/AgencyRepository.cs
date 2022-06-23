@@ -15,7 +15,7 @@ namespace SFA.DAS.Rofjaa.Data.Repository
             _rofjaaDataContext = rofjaaDataContext;
         }
 
-        public async Task<Agency> Get(int id)
+        public async Task<Agency> Get(long id)
         {
             var agency = await _rofjaaDataContext
                 .Agency

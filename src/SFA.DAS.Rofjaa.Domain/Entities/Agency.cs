@@ -2,7 +2,7 @@
 {
     public class Agency
     {
-        public int LegalEntityId { get; set; }
+        public long LegalEntityId { get; set; }
         public bool IsGrantFunded { get; set; }
     }
 }
