@@ -5,8 +5,8 @@
     <ProjectGuid>0CA16441-4C8B-4FC3-BD23-08F25F491336</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AutoFixture" Version="4.12.0" />
-    <PackageReference Include="AutoFixture.NUnit3" Version="4.12.0" />
+    <PackageReference Include="AutoFixture" Version="4.17.0" />
+    <PackageReference Include="AutoFixture.NUnit3" Version="4.17.0" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Lucene.Net" Version="4.8.0-beta00008" />
     <PackageReference Include="Moq" Version="4.18.1" />

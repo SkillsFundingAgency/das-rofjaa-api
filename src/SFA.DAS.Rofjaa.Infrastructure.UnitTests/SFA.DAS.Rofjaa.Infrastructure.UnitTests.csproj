@@ -5,9 +5,9 @@
     <ProjectGuid>29EF260E-F154-4EEE-8312-4AEDFC35BF7A</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AutoFixture" Version="4.12.0" />
+    <PackageReference Include="AutoFixture" Version="4.17.0" />
     <PackageReference Include="AutoFixture.AutoMoq" Version="4.12.0" />
-    <PackageReference Include="AutoFixture.NUnit3" Version="4.12.0" />
+    <PackageReference Include="AutoFixture.NUnit3" Version="4.17.0" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="coverlet.msbuild" Version="3.1.2">
