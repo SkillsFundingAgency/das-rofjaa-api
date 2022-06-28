@@ -19,10 +19,10 @@
     <ProjectReference Include="..\SFA.DAS.Rofjaa.Domain\SFA.DAS.Rofjaa.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AngleSharp" Version="0.14.0" />
-    <PackageReference Include="CsvHelper" Version="15.0.5" />
+    <PackageReference Include="AngleSharp" Version="0.17.1" />
+    <PackageReference Include="CsvHelper" Version="27.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="6.0.6" />
-    <PackageReference Include="SFA.DAS.Api.Common" Version="1.0.11" />
+    <PackageReference Include="SFA.DAS.Api.Common" Version="1.0.19" />
   </ItemGroup>
 </Project>
