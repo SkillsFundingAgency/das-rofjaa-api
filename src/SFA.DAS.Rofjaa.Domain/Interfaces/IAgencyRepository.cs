@@ -6,7 +6,7 @@ namespace SFA.DAS.Rofjaa.Domain.Interfaces
 {
     public interface IAgencyRepository
     {
-        Task<Agency> Get(int id);
+        Task<Agency> Get(long id);
         Task<IEnumerable<Agency>> GetAll();
     }
 }

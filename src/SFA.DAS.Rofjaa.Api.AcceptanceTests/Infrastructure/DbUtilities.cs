@@ -36,7 +36,7 @@ namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Infrastructure
             };
         }
 
-        public static Agency GetAgency(int id)
+        public static Agency GetAgency(long id)
         {
             return GetAgencies().FirstOrDefault(c => c.LegalEntityId.Equals(id));
         }

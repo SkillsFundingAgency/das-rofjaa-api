@@ -22,7 +22,7 @@ namespace SFA.DAS.Rofjaa.Api.Controllers
             
         [HttpGet]
         [Route("{legalEntityId}")]
-        public async Task<IActionResult> Get(int legalEntityId)
+        public async Task<IActionResult> Get(long legalEntityId)
         {
             var result = await _mediator.Send(new GetAgencyQuery { LegalEntityId = legalEntityId });
 

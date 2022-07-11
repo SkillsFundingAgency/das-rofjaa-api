@@ -35,7 +35,7 @@ namespace SFA.DAS.Rofjaa.Api.UnitTests.Controllers
         public async Task GET_Agency_Requested_Doesnt_Exist_NotFound_Returned()
         {
             // Arrange
-            var id = _fixture.Create<int>();
+            var id = _fixture.Create<long>();
 
             var result = new GetAgenciesResult();
 

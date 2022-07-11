@@ -15,7 +15,7 @@ namespace SFA.DAS.Rofjaa.Data.UnitTests.Repository.AgencyRepository
         private Mock<IRofjaaDataContext> _rofjaaDataContext;
         private List<Agency> _agencies;
         private Data.Repository.AgencyRepository _agencyRepository;
-        private const int ExpectedAgencyId = 1;
+        private const long ExpectedAgencyId = 1;
 
         [SetUp]
         public void Arrange()

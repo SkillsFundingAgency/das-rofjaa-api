@@ -4,6 +4,7 @@ using System.Threading;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Moq.Language.Flow;
+using NSubstitute;
 
 namespace SFA.DAS.Rofjaa.Data.UnitTests.DatabaseMock
 {
@@ -44,7 +45,7 @@ namespace SFA.DAS.Rofjaa.Data.UnitTests.DatabaseMock
 			where TEntity : class
 		{
 			mock.Setup(m => m.AsQueryable()).Returns(mock.Object);
-			mock.Setup(m => m.AsAsyncEnumerable()).Returns(mock.Object);
+			mock.Setup(m => m.AsAsyncEnumerable()).Returns((IAsyncEnumerable<TEntity>)mock.Object);
 		}
 
 		private static void ConfigureQueryableCalls<TEntity>(
