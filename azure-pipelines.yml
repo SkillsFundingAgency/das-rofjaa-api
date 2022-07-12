@@ -31,7 +31,7 @@ resources:
   - repository: das-platform-building-blocks
     type: github
     name: SkillsFundingAgency/das-platform-building-blocks
-    ref: refs/tags/0.4.63
+    ref: refs/tags/0.4.64
     endpoint: SkillsFundingAgency
   - repository: das-platform-automation
     type: github
@@ -71,6 +71,8 @@ stages:
       DACPACSolutionBaseName: $(DACPACSolutionBaseName)
       ServiceConnection: SFA-DAS-DevTest-ARM
       OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+      AppRoleAssignmentsServiceConnection: das-app-role-assignments-CDS
+      AADGroupObjectIdArray: $(AdminAADGroupObjectId),$(DevAADGroupObjectId)
 
 - stage: Deploy_TEST
   dependsOn: Build
@@ -86,6 +88,8 @@ stages:
       DACPACSolutionBaseName: $(DACPACSolutionBaseName)
       ServiceConnection: SFA-DAS-DevTest-ARM
       OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+      AppRoleAssignmentsServiceConnection: das-app-role-assignments-CDS
+      AADGroupObjectIdArray: $(AdminAADGroupObjectId),$(DevAADGroupObjectId)
 
 - stage: Deploy_TEST2
   dependsOn: Build
@@ -101,6 +105,8 @@ stages:
       DACPACSolutionBaseName: $(DACPACSolutionBaseName)
       ServiceConnection: SFA-DAS-DevTest-ARM
       OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+      AppRoleAssignmentsServiceConnection: das-app-role-assignments-CDS
+      AADGroupObjectIdArray: $(AdminAADGroupObjectId),$(DevAADGroupObjectId)
 
 - stage: Deploy_PP
   dependsOn: Build
@@ -116,6 +122,8 @@ stages:
       SolutionBaseName: $(SolutionBaseName)
       DACPACSolutionBaseName: $(DACPACSolutionBaseName)
       OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+      AppRoleAssignmentsServiceConnection: das-app-role-assignments-FCS
+      AADGroupObjectIdArray: $(AdminAADGroupObjectId),$(DevAADGroupObjectId)
 
 # - stage: Deploy_PROD
 #   dependsOn: Build
@@ -132,6 +140,7 @@ stages:
 #       SolutionBaseName: $(SolutionBaseName)
 #       DACPACSolutionBaseName: $(DACPACSolutionBaseName)
 #       OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+#       AppRoleAssignmentsServiceConnection: das-app-role-assignments-FCS
 
 # - stage: Deploy_MO
 #   dependsOn: Build
@@ -147,6 +156,8 @@ stages:
 #       SolutionBaseName: $(SolutionBaseName)
 #       DACPACSolutionBaseName: $(DACPACSolutionBaseName)
 #       OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+#       AppRoleAssignmentsServiceConnection: das-app-role-assignments-FCS
+#       AADGroupObjectIdArray: $(AdminAADGroupObjectId),$(DevAADGroupObjectId)
 
 - stage: Deploy_DEMO
   dependsOn: Build
@@ -162,3 +173,5 @@ stages:
       SolutionBaseName: $(SolutionBaseName)
       DACPACSolutionBaseName: $(DACPACSolutionBaseName)
       OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+      AppRoleAssignmentsServiceConnection: das-app-role-assignments-CDS
+      AADGroupObjectIdArray: $(AdminAADGroupObjectId),$(DevAADGroupObjectId)
