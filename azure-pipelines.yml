@@ -31,7 +31,7 @@ resources:
   - repository: das-platform-building-blocks
     type: github
     name: SkillsFundingAgency/das-platform-building-blocks
-    ref: refs/tags/0.4.63
+    ref: refs/tags/0.4.64
     endpoint: SkillsFundingAgency
   - repository: das-platform-automation
     type: github
@@ -117,36 +117,36 @@ stages:
       DACPACSolutionBaseName: $(DACPACSolutionBaseName)
       OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
 
-# - stage: Deploy_PROD
-#   dependsOn: Build
-#   displayName: Deploy to PROD
-#   variables:
-#   - group: PROD Management Resources
-#   - group: PROD Shared Resources
-#   - group: __PRODSpecificReleaseVariables__ #PLACEHOLDER
-#   jobs:
-#   - template: pipeline-templates/job/deploy.yml
-#     parameters:
-#       Environment: PROD
-#       ServiceConnection: SFA-DIG-Prod-ARM
-#       SolutionBaseName: $(SolutionBaseName)
-#       DACPACSolutionBaseName: $(DACPACSolutionBaseName)
-#       OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+- stage: Deploy_PROD
+  dependsOn: Build
+  displayName: Deploy to PROD
+  variables:
+  - group: PROD Management Resources
+  - group: PROD Shared Resources
+  - group: PROD das-rofjaa-api
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      Environment: PROD
+      ServiceConnection: SFA-DIG-Prod-ARM
+      SolutionBaseName: $(SolutionBaseName)
+      DACPACSolutionBaseName: $(DACPACSolutionBaseName)
+      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
 
-# - stage: Deploy_MO
-#   dependsOn: Build
-#   displayName: Deploy to MO
-#   variables:
-#   - group: MO Management Resources
-#   - group: MO Shared Resources
-#   jobs:
-#   - template: pipeline-templates/job/deploy.yml
-#     parameters:
-#       Environment: MO
-#       ServiceConnection: SFA-ASM-ModelOffice-ARM
-#       SolutionBaseName: $(SolutionBaseName)
-#       DACPACSolutionBaseName: $(DACPACSolutionBaseName)
-#       OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+- stage: Deploy_MO
+  dependsOn: Build
+  displayName: Deploy to MO
+  variables:
+  - group: MO Management Resources
+  - group: MO Shared Resources
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      Environment: MO
+      ServiceConnection: SFA-ASM-ModelOffice-ARM
+      SolutionBaseName: $(SolutionBaseName)
+      DACPACSolutionBaseName: $(DACPACSolutionBaseName)
+      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
 
 - stage: Deploy_DEMO
   dependsOn: Build
