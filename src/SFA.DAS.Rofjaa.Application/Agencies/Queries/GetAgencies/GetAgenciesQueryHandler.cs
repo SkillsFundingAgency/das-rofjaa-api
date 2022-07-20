@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -27,6 +28,10 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies
                     LegalEntityId = x.LegalEntityId,
                     IsGrantFunded = x.IsGrantFunded
                 })
+                .Where(x =>
+                    x.EffectiveFrom <= DateTime.Today &&
+                    x.EffectiveTo >= DateTime.Today
+                )
                 .AsNoTracking()
                 .AsSingleQuery()
                 .ToListAsync(cancellationToken);

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -18,7 +19,11 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency
         public async Task<GetAgencyResult> Handle(GetAgencyQuery request, CancellationToken cancellationToken)
         {
             var agencyQuery = _rofjaaDataContext.Agency
-                .Where(x => x.LegalEntityId == request.LegalEntityId)
+                .Where(x =>
+                    x.LegalEntityId == request.LegalEntityId &&
+                    x.EffectiveFrom <= DateTime.Today &&
+                    x.EffectiveTo >= DateTime.Today
+                )
                 .AsQueryable();
 
             var agency = await agencyQuery.SingleOrDefaultAsync(cancellationToken: cancellationToken);
