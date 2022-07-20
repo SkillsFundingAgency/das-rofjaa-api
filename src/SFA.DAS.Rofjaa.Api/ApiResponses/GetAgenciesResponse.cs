@@ -12,23 +12,13 @@ namespace SFA.DAS.Rofjaa.Api.ApiResponses
         {
             public long LegalEntityId { get; set; }
             public bool IsGrantFunded { get; set; }
-            public DateTime EffectiveFrom { get; set; }
-            public DateTime EffectiveTo { get; set; }
-            public string RemovalReason { get; set; }
-            public DateTime CreatedDate { get; set; }
-            public DateTime LastUpdatedDate { get; set; }
 
             public static implicit operator Agency(GetAgenciesResult.Agency agency)
             {
                 return new Agency()
                 {
                     LegalEntityId = agency.LegalEntityId,
-                    IsGrantFunded = agency.IsGrantFunded,
-                    EffectiveFrom = agency.EffectiveFrom,
-                    EffectiveTo = agency.EffectiveTo,
-                    RemovalReason = agency.RemovalReason,
-                    CreatedDate = agency.CreatedDate,
-                    LastUpdatedDate = agency.LastUpdatedDate
+                    IsGrantFunded = agency.IsGrantFunded
                 };
             }
         }

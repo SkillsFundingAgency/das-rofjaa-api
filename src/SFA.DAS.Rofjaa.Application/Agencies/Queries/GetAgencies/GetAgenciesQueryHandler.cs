@@ -23,15 +23,15 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies
                 .AsQueryable();
 
             var agencies = await agenciesQuery
+                .Where(x =>
+                    x.EffectiveFrom <= DateTime.Now &&
+                    x.EffectiveTo >= DateTime.Now
+                )
                 .Select(x => new GetAgenciesResult.Agency
                 {
                     LegalEntityId = x.LegalEntityId,
                     IsGrantFunded = x.IsGrantFunded
                 })
-                .Where(x =>
-                    x.EffectiveFrom <= DateTime.Today &&
-                    x.EffectiveTo >= DateTime.Today
-                )
                 .AsNoTracking()
                 .AsSingleQuery()
                 .ToListAsync(cancellationToken);
