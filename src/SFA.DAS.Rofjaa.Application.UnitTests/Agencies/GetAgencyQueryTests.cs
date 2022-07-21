@@ -31,13 +31,6 @@ namespace SFA.DAS.Rofjaa.Application.UnitTests.Agencies.Queries.GetAgency
             Assert.That(_testClass.LegalEntityId, Is.EqualTo(testValue));
         }
 
-        [Test]
-        public void CanGetBetweenDates()
-        {
-         
-
-
-        }
 
     }
 }
