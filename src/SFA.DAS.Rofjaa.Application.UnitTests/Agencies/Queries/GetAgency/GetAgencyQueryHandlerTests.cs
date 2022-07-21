@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
+using Moq;
 using NUnit.Framework;
 using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency;
+using SFA.DAS.Rofjaa.Application.Common.DateTime;
 using SFA.DAS.Rofjaa.Application.UnitTests.DataFixture;
 
 namespace SFA.DAS.Rofjaa.Application.UnitTests.Queries.GetAgency
@@ -11,13 +14,15 @@ namespace SFA.DAS.Rofjaa.Application.UnitTests.Queries.GetAgency
     public class GetAgencyQueryHandlerTests : RofjaaDbContextFixture
     {
         private readonly Fixture _fixture = new Fixture();
+        private Mock<IDateTimeProvider> _dateTimeProvider;
 
         [Test]
         public async Task Handle_Individual_Agency_Not_Found_Null_Returned()
         {
             await PopulateDbContext();
+            _dateTimeProvider = new Mock<IDateTimeProvider>();
 
-            var getAgencyQueryHandler = new GetAgencyQueryHandler(DbContext);
+            var getAgencyQueryHandler = new GetAgencyQueryHandler(DbContext, _dateTimeProvider.Object);
 
             var getAgencyQuery = new GetAgencyQuery()
             {
