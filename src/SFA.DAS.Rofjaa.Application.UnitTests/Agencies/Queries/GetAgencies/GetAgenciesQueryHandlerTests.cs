@@ -18,7 +18,6 @@ namespace SFA.DAS.Rofjaa.Application.UnitTests.Queries.GetAgencies
         private Fixture _fixture;
         private Mock<IDateTimeProvider> _dateTimeProvider;
 
-
         [SetUp]
         public async Task Setup()
         {
