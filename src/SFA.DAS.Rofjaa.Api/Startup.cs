@@ -24,6 +24,7 @@ using SFA.DAS.Rofjaa.Domain.Configuration;
 using SFA.DAS.Rofjaa.Data;
 using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency;
 using System.Diagnostics.CodeAnalysis;
+using SFA.DAS.Rofjaa.Application.Common.DateTime;
 
 namespace SFA.DAS.Rofjaa.Api
 {
@@ -70,6 +71,7 @@ namespace SFA.DAS.Rofjaa.Api
             services.AddSingleton(cfg => cfg.GetService<IOptions<RofjaaConfiguration>>().Value);
             services.Configure<AzureActiveDirectoryConfiguration>(_configuration.GetSection("AzureAd"));
             services.AddSingleton(cfg => cfg.GetService<IOptions<AzureActiveDirectoryConfiguration>>().Value);
+            services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
 
             var rofjaaConfiguration = _configuration
                 .GetSection("Rofjaa")
