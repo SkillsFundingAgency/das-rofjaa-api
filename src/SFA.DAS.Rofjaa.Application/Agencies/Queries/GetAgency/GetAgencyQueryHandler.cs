@@ -25,7 +25,7 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency
                 .Where(x =>
                     x.LegalEntityId == request.LegalEntityId &&
                     x.EffectiveFrom <= _dateTimeProvider.GetNowUtc() &&
-                    x.EffectiveTo >= _dateTimeProvider.GetNowUtc()
+                    x.EffectiveTo == null || x.EffectiveTo >= _dateTimeProvider.GetNowUtc()
                 )
                 .AsQueryable();
 
