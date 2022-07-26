@@ -96,6 +96,11 @@ namespace SFA.DAS.Rofjaa.Api
 
             }
 
+            services.AddAntiforgery(options =>
+            {
+                options.SuppressXFrameOptionsHeader = true;
+            });
+
             services.AddMediatR(typeof(GetAgencyResult).GetTypeInfo().Assembly);
 
             services.AddServiceRegistration();
