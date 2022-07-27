@@ -4,6 +4,7 @@ namespace SFA.DAS.Rofjaa.Domain.Entities
 {
     public class Agency
     {
+        public int Id { get; set; }
         public long LegalEntityId { get; set; }
         public bool IsGrantFunded { get; set; }
         public DateTime EffectiveFrom { get; set; }

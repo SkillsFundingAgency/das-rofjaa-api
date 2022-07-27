@@ -36,6 +36,7 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies
                     IsGrantFunded = x.IsGrantFunded
                 })
                 .AsNoTracking()
+                .OrderByDescending(x => x.Id)
                 .AsSingleQuery()
                 .ToListAsync(cancellationToken);
 
