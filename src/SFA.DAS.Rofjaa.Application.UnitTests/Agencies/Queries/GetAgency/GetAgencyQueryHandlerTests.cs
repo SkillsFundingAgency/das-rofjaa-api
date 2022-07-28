@@ -17,7 +17,7 @@ namespace SFA.DAS.Rofjaa.Application.UnitTests.Queries.GetAgency
         private Mock<IDateTimeProvider> _dateTimeProvider;
 
         [Test]
-        public async Task Handle_Individual_Agency_Not_Found_Null_Returned()
+        public async Task Individual_Agency_Not_Found_Null_Returned()
         {
             await PopulateDbContext();
             _dateTimeProvider = new Mock<IDateTimeProvider>();
@@ -36,17 +36,70 @@ namespace SFA.DAS.Rofjaa.Application.UnitTests.Queries.GetAgency
             Assert.IsNull(result);
         }
 
+        [Test]
+        public async Task Individual_Agency_Inside_Date_Is_Returned()
+        {
+            await PopulateDbContextInsideDates();
+            _dateTimeProvider = new Mock<IDateTimeProvider>();
+
+            var getAgencyQueryHandler = new GetAgencyQueryHandler(DbContext, _dateTimeProvider.Object);
+
+            var getAgencyQuery = new GetAgencyQuery()
+            {
+                LegalEntityId = 1
+            };
+
+            // Act
+            var result = await getAgencyQueryHandler.Handle(getAgencyQuery, CancellationToken.None);
+
+            // Assert
+            Assert.AreEqual(result.LegalEntityId,1);
+        }
+
+        [Test]
+        public async Task Individual_Agency_Outside_Date_Not_Returned()
+        {
+            await PopulateDbContextOutsideDates();
+            _dateTimeProvider = new Mock<IDateTimeProvider>();
+
+            var getAgencyQueryHandler = new GetAgencyQueryHandler(DbContext, _dateTimeProvider.Object);
+
+            var getAgencyQuery = new GetAgencyQuery()
+            {
+                LegalEntityId = 1
+            };
+
+            // Act
+            var result = await getAgencyQueryHandler.Handle(getAgencyQuery, CancellationToken.None);
+
+            // Assert
+            Assert.AreEqual(result.Id,0);
+        }
+
         protected async Task PopulateDbContext()
         {
             var agencies = new List<Domain.Entities.Agency>();
-
             agencies.Add(new Domain.Entities.Agency() { LegalEntityId = 1, IsGrantFunded = false });
             agencies.Add(new Domain.Entities.Agency() { LegalEntityId = 2, IsGrantFunded = false });
-
             await DbContext.Agency.AddRangeAsync(agencies);
-
             await DbContext.SaveChangesAsync();
-
         }
+
+        protected async Task PopulateDbContextInsideDates()
+        {
+            var agencies = new List<Domain.Entities.Agency>();
+            agencies.Add(new Domain.Entities.Agency() { LegalEntityId = 1, IsGrantFunded = false, EffectiveFrom = new DateTime(2020, 01, 01), EffectiveTo = new DateTime(2030, 01, 01) });
+            await DbContext.Agency.AddRangeAsync(agencies);
+            await DbContext.SaveChangesAsync();
+        }
+
+        protected async Task PopulateDbContextOutsideDates()
+        {
+            var agencies = new List<Domain.Entities.Agency>();
+            agencies.Add(new Domain.Entities.Agency() { LegalEntityId = 1, IsGrantFunded = false, EffectiveFrom = new DateTime(2010, 01, 01), EffectiveTo = new DateTime(2020, 01, 01) });
+            await DbContext.Agency.AddRangeAsync(agencies);
+            await DbContext.SaveChangesAsync();
+        }
+
     }
 }
