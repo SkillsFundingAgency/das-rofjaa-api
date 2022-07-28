@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Agency]
 (
-	[Id] bigint NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Id] int NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[LegalEntityId] bigint NOT NULL,
 	[IsGrantFunded] bit NOT NULL DEFAULT 0,
 	[EffectiveFrom] DATETIME2,

@@ -30,13 +30,13 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies
                     x.EffectiveFrom <= _dateTimeProvider.GetNowUtc() &&
                     x.EffectiveTo == null || x.EffectiveTo >= _dateTimeProvider.GetNowUtc()
                 )
+                .OrderByDescending(x => x.Id)
                 .Select(x => new GetAgenciesResult.Agency
                 {
                     LegalEntityId = x.LegalEntityId,
                     IsGrantFunded = x.IsGrantFunded
                 })
                 .AsNoTracking()
-                .OrderByDescending(x => x.Id)
                 .AsSingleQuery()
                 .ToListAsync(cancellationToken);
 
