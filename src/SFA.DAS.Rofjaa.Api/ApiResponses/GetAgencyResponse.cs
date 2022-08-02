@@ -1,4 +1,5 @@
-﻿using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency;
+﻿using System;
+using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency;
 using SFA.DAS.Rofjaa.Domain.Entities;
 
 namespace SFA.DAS.Rofjaa.Api.ApiResponses

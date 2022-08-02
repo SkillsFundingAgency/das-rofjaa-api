@@ -29,10 +29,8 @@ namespace SFA.DAS.Rofjaa.Api.UnitTests.Controllers
             _agenciesController = new AgenciesController(_mockMediator.Object);
         }
 
-       
-
         [Test]
-        public async Task GET_Agency_Requested_Doesnt_Exist_NotFound_Returned()
+        public async Task Agency_Requested_Doesnt_Exist_NotFound_Returned()
         {
             // Arrange
             var id = _fixture.Create<long>();
@@ -53,10 +51,78 @@ namespace SFA.DAS.Rofjaa.Api.UnitTests.Controllers
             Assert.AreEqual(notFoundResult.StatusCode, (int)HttpStatusCode.NotFound);
         }
 
-     
+        [Test]
+        public async Task Agencies_Outside_Current_Date_Are_Not_Returned()
+        {
+            // Arrange
+            var expectedAgencies = _fixture.CreateMany<GetAgenciesResult.Agency>();
+
+            var result = new GetAgenciesResult()
+            {
+                Items = expectedAgencies.ToList()
+            };
+
+            foreach(var a in result.Items)
+            {
+                a.EffectiveFrom = new System.DateTime(2010, 01, 01);
+                a.EffectiveTo = new System.DateTime(2020, 01, 01);
+            }
+
+            _mockMediator
+                .Setup(x => x.Send(It.Is<GetAgenciesQuery>(x => x != null), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(result);
+
+            // Act
+            var actionResult = await _agenciesController.GetList();
+            var okObjectResult = actionResult as OkObjectResult;
+            var response = okObjectResult.Value as GetAgenciesResponse;
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.IsNotNull(okObjectResult);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(okObjectResult.StatusCode, (int)HttpStatusCode.OK);
+
+            Assert.AreEqual(expectedAgencies.Count(), response.Agencies.Count());
+        }
 
         [Test]
-        public async Task GET_All_Agencies_Returned()
+        public async Task Agencies_Inside_Current_Date_Are_Returned()
+        {
+            // Arrange
+            var expectedAgencies = _fixture.CreateMany<GetAgenciesResult.Agency>();
+
+            var result = new GetAgenciesResult()
+            {
+                Items = expectedAgencies.ToList()
+            };
+
+            foreach(var a in result.Items)
+            {
+                a.EffectiveFrom = new System.DateTime(2020,01,01);
+                a.EffectiveTo = new System.DateTime(2030,01,01);
+            }
+
+            _mockMediator
+                .Setup(x => x.Send(It.Is<GetAgenciesQuery>(x => x != null), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(result);
+
+            // Act
+            var actionResult = await _agenciesController.GetList();
+            var okObjectResult = actionResult as OkObjectResult;
+            var response = okObjectResult.Value as GetAgenciesResponse;
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.IsNotNull(okObjectResult);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(okObjectResult.StatusCode, (int)HttpStatusCode.OK);
+
+            Assert.AreEqual(expectedAgencies.Count(), response.Agencies.Count());
+        }
+
+        [Test]
+        public async Task All_Agencies_Returned()
         {
             // Arrange
             var expectedAgencies = _fixture.CreateMany<GetAgenciesResult.Agency>();
@@ -83,7 +149,5 @@ namespace SFA.DAS.Rofjaa.Api.UnitTests.Controllers
 
             Assert.AreEqual(expectedAgencies.Count(), response.Agencies.Count());
         }
-
-      
     }
 }
