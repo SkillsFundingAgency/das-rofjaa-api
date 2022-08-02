@@ -100,8 +100,6 @@ namespace SFA.DAS.Rofjaa.Api
 
             services.AddMediatR(typeof(GetAgencyResult).GetTypeInfo().Assembly);
 
-            services.AddServiceRegistration();
-
             services.AddDatabaseRegistration(rofjaaConfiguration, _configuration["EnvironmentName"]);
 
             services

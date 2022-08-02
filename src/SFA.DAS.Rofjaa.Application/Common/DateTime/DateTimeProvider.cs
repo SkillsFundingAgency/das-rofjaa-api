@@ -12,15 +12,5 @@ namespace SFA.DAS.Rofjaa.Application.Common.DateTime
         {
             return System.DateTime.UtcNow;
         }
-
-        public System.DateTime ConvertUtcToUk(System.DateTime utcDateTime)
-        {
-            return TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time"));
-        }
-
-        public System.DateTime ConvertOpaToLocalDateTime(string opaDateTime)
-        {
-            return Convert.ToDateTime(opaDateTime, culture);
-        }
     }
 }
