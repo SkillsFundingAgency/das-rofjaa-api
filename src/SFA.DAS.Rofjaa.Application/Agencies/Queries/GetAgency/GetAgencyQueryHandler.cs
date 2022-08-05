@@ -27,9 +27,10 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency
                     x.EffectiveFrom <= _dateTimeProvider.GetNowUtc() &&
                     x.EffectiveTo == null || x.EffectiveTo >= _dateTimeProvider.GetNowUtc()
                 )
+                .OrderByDescending(x => x.CreatedDate)
                 .AsQueryable();
 
-            var agency = await agencyQuery.LastOrDefaultAsync(cancellationToken: cancellationToken);
+            var agency = await agencyQuery.FirstOrDefaultAsync(cancellationToken: cancellationToken);
 
             if (agency == null)
             {
