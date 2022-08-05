@@ -61,21 +61,21 @@ namespace SFA.DAS.Rofjaa.Application.UnitTests.Queries.GetAgency
         public async Task Individual_Agency_Outside_Date_Not_Returned()
         {
             await PopulateDbContextOutsideDates();
-            int id = 0;
+            int legalEntityId = 1;
             _dateTimeProvider = new Mock<IDateTimeProvider>();
 
             var getAgencyQueryHandler = new GetAgencyQueryHandler(DbContext, _dateTimeProvider.Object);
 
             var getAgencyQuery = new GetAgencyQuery()
             {
-                LegalEntityId = 1
+                LegalEntityId = legalEntityId
             };
 
             // Act
             var result = await getAgencyQueryHandler.Handle(getAgencyQuery, CancellationToken.None);
 
             // Assert
-            Assert.AreEqual(result.Id, id);
+            Assert.AreEqual(result.LegalEntityId, legalEntityId);
         }
 
         protected async Task PopulateDbContext()
