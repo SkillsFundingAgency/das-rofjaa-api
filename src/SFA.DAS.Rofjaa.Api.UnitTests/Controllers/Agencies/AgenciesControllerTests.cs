@@ -65,7 +65,6 @@ namespace SFA.DAS.Rofjaa.Api.UnitTests.Controllers
             foreach(var a in result.Items)
             {
                 a.EffectiveFrom = new System.DateTime(2010, 01, 01);
-                a.EffectiveTo = new System.DateTime(2020, 01, 01);
             }
 
             _mockMediator
@@ -100,7 +99,6 @@ namespace SFA.DAS.Rofjaa.Api.UnitTests.Controllers
             foreach(var a in result.Items)
             {
                 a.EffectiveFrom = new System.DateTime(2020,01,01);
-                a.EffectiveTo = new System.DateTime(2030,01,01);
             }
 
             _mockMediator

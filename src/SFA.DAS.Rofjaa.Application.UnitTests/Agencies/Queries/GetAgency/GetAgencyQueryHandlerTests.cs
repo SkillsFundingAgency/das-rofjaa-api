@@ -90,7 +90,7 @@ namespace SFA.DAS.Rofjaa.Application.UnitTests.Queries.GetAgency
         protected async Task PopulateDbContextInsideDates()
         {
             var agencies = new List<Domain.Entities.Agency>();
-            agencies.Add(new Domain.Entities.Agency() { LegalEntityId = 1, IsGrantFunded = false, EffectiveFrom = new DateTime(2020, 01, 01), EffectiveTo = new DateTime(2030, 01, 01) });
+            agencies.Add(new Domain.Entities.Agency() { LegalEntityId = 1, IsGrantFunded = false, EffectiveFrom = new DateTime(2020, 01, 01) });
             await DbContext.Agency.AddRangeAsync(agencies);
             await DbContext.SaveChangesAsync();
         }
@@ -98,7 +98,7 @@ namespace SFA.DAS.Rofjaa.Application.UnitTests.Queries.GetAgency
         protected async Task PopulateDbContextOutsideDates()
         {
             var agencies = new List<Domain.Entities.Agency>();
-            agencies.Add(new Domain.Entities.Agency() { LegalEntityId = 1, IsGrantFunded = false, EffectiveFrom = new DateTime(2010, 01, 01), EffectiveTo = new DateTime(2020, 01, 01) });
+            agencies.Add(new Domain.Entities.Agency() { LegalEntityId = 1, IsGrantFunded = false, EffectiveFrom = new DateTime(2010, 01, 01) });
             await DbContext.Agency.AddRangeAsync(agencies);
             await DbContext.SaveChangesAsync();
         }
