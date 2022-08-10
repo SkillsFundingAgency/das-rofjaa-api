@@ -36,47 +36,6 @@ namespace SFA.DAS.Rofjaa.Application.UnitTests.Queries.GetAgency
             Assert.IsNull(result);
         }
 
-        [Test]
-        public async Task Individual_Agency_Inside_Date_Is_Returned()
-        {
-            await PopulateDbContextInsideDates();
-            int id = 1;
-            _dateTimeProvider = new Mock<IDateTimeProvider>();
-
-            var getAgencyQueryHandler = new GetAgencyQueryHandler(DbContext, _dateTimeProvider.Object);
-
-            var getAgencyQuery = new GetAgencyQuery()
-            {
-                LegalEntityId = 1
-            };
-
-            // Act
-            var result = await getAgencyQueryHandler.Handle(getAgencyQuery, CancellationToken.None);
-
-            // Assert
-            Assert.AreEqual(result.LegalEntityId, id);
-        }
-
-        [Test]
-        public async Task Individual_Agency_Outside_Date_Not_Returned()
-        {
-            await PopulateDbContextOutsideDates();
-            int legalEntityId = 1;
-            _dateTimeProvider = new Mock<IDateTimeProvider>();
-
-            var getAgencyQueryHandler = new GetAgencyQueryHandler(DbContext, _dateTimeProvider.Object);
-
-            var getAgencyQuery = new GetAgencyQuery()
-            {
-                LegalEntityId = legalEntityId
-            };
-
-            // Act
-            var result = await getAgencyQueryHandler.Handle(getAgencyQuery, CancellationToken.None);
-
-            // Assert
-            Assert.AreEqual(result.LegalEntityId, legalEntityId);
-        }
 
         protected async Task PopulateDbContext()
         {
@@ -98,7 +57,7 @@ namespace SFA.DAS.Rofjaa.Application.UnitTests.Queries.GetAgency
         protected async Task PopulateDbContextOutsideDates()
         {
             var agencies = new List<Domain.Entities.Agency>();
-            agencies.Add(new Domain.Entities.Agency() { LegalEntityId = 1, IsGrantFunded = false, EffectiveFrom = new DateTime(2010, 01, 01) });
+            agencies.Add(new Domain.Entities.Agency() { LegalEntityId = 1, IsGrantFunded = false, EffectiveFrom = new DateTime(2030, 01, 01) });
             await DbContext.Agency.AddRangeAsync(agencies);
             await DbContext.SaveChangesAsync();
         }
