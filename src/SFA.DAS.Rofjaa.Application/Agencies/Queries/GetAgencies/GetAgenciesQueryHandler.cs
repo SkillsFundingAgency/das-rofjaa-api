@@ -27,7 +27,8 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies
 
             var agencies = await agenciesQuery
                 .Where(x =>
-                    x.EffectiveFrom <= _dateTimeProvider.GetNowUtc()
+                    x.EffectiveFrom <= _dateTimeProvider.GetNowUtc() &&
+                    (x.EffectiveTo == null || x.EffectiveTo >= _dateTimeProvider.GetNowUtc())
                 )
                 .OrderByDescending(x => x.CreatedDate)
                 .Select(x => new GetAgenciesResult.Agency

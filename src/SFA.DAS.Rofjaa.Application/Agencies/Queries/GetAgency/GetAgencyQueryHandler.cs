@@ -24,7 +24,8 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency
             var agencyQuery = _rofjaaDataContext.Agency
                 .Where(x =>
                     x.LegalEntityId == request.LegalEntityId &&
-                    x.EffectiveFrom <= _dateTimeProvider.GetNowUtc()
+                    x.EffectiveFrom <= _dateTimeProvider.GetNowUtc() &&
+                    (x.EffectiveTo == null || x.EffectiveTo >= _dateTimeProvider.GetNowUtc())
                 )
                 .OrderByDescending(x => x.CreatedDate)
                 .AsQueryable();
