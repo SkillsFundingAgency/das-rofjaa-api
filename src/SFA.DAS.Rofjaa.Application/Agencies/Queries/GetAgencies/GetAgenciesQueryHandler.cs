@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using SFA.DAS.Rofjaa.Application.Common.DateTime;
 using SFA.DAS.Rofjaa.Data;
 
 namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies
@@ -10,10 +12,12 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies
     public class GetAgenciesQueryHandler : IRequestHandler<GetAgenciesQuery, GetAgenciesResult>
     {
         private readonly RofjaaDataContext _rofjaaDataContext;
+        private readonly IDateTimeProvider _dateTimeProvider;
 
-        public GetAgenciesQueryHandler(RofjaaDataContext rofjaaDataContext)
+        public GetAgenciesQueryHandler(RofjaaDataContext rofjaaDataContext, IDateTimeProvider dateTimeProvider)
         {
             _rofjaaDataContext = rofjaaDataContext;
+            _dateTimeProvider = dateTimeProvider;
         }
 
         public async Task<GetAgenciesResult> Handle(GetAgenciesQuery request, CancellationToken cancellationToken)
@@ -22,6 +26,11 @@ namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies
                 .AsQueryable();
 
             var agencies = await agenciesQuery
+                .Where(x =>
+                    x.EffectiveFrom <= _dateTimeProvider.GetNowUtc() &&
+                    (x.EffectiveTo == null || x.EffectiveTo >= _dateTimeProvider.GetNowUtc())
+                )
+                .OrderByDescending(x => x.CreatedDate)
                 .Select(x => new GetAgenciesResult.Agency
                 {
                     LegalEntityId = x.LegalEntityId,

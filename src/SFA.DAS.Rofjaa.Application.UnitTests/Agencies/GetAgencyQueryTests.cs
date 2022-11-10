@@ -1,6 +1,7 @@
 using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency;
 using System;
 using NUnit.Framework;
+using Moq;
 
 namespace SFA.DAS.Rofjaa.Application.UnitTests.Agencies.Queries.GetAgency
 {
@@ -29,5 +30,7 @@ namespace SFA.DAS.Rofjaa.Application.UnitTests.Agencies.Queries.GetAgency
             _testClass.LegalEntityId = testValue;
             Assert.That(_testClass.LegalEntityId, Is.EqualTo(testValue));
         }
+
+
     }
 }
