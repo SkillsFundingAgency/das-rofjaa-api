@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ProjectGuid>BCAB4ABA-AE1F-46D0-B33B-33355F8F2FB0</ProjectGuid>
     <LangVersion>default</LangVersion>
   </PropertyGroup>
@@ -23,7 +23,7 @@
     <PackageReference Include="AngleSharp" Version="0.17.1" />
     <PackageReference Include="CsvHelper" Version="27.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="6.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="8.0.7" />
     <PackageReference Include="SFA.DAS.Api.Common" Version="1.0.19" />
   </ItemGroup>
 </Project>
