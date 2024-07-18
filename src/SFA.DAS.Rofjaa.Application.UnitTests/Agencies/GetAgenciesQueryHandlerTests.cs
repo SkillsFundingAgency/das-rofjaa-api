@@ -1,34 +1,29 @@
-using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies;
-using System;
-using NUnit.Framework;
-using SFA.DAS.Rofjaa.Data;
-using System.Threading;
-using System.Threading.Tasks;
-using SFA.DAS.Rofjaa.Application.Common.DateTime;
+using FluentAssertions;
 using Moq;
+using NUnit.Framework;
+using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies;
+using SFA.DAS.Rofjaa.Application.Common.DateTime;
+using SFA.DAS.Rofjaa.Data;
 
-namespace SFA.DAS.Rofjaa.Application.UnitTests.Agencies.Queries.GetAgencies
+namespace SFA.DAS.Rofjaa.Application.UnitTests.Agencies;
+
+[TestFixture]
+public class GetAgenciesQueryHandlerTests
 {
-    [TestFixture]
-    public class GetAgenciesQueryHandlerTests
+    private RofjaaDataContext _rofjaaDataContext;
+    private Mock<IDateTimeProvider> _dateTimeProvider;
+
+    [SetUp]
+    public void SetUp()
     {
-        private GetAgenciesQueryHandler _testClass;
-        private RofjaaDataContext _rofjaaDataContext;
-        private Mock<IDateTimeProvider> _dateTimeProvider;
+        _rofjaaDataContext = new RofjaaDataContext();
+        _dateTimeProvider = new Mock<IDateTimeProvider>();
+    }
 
-        [SetUp]
-        public void SetUp()
-        {
-            _rofjaaDataContext = new RofjaaDataContext();
-            _dateTimeProvider = new Mock<IDateTimeProvider>();
-            _testClass = new GetAgenciesQueryHandler(_rofjaaDataContext, _dateTimeProvider.Object);
-        }
-
-        [Test]
-        public void CanConstruct()
-        {
-            var instance = new GetAgenciesQueryHandler(_rofjaaDataContext, _dateTimeProvider.Object);
-            Assert.That(instance, Is.Not.Null);
-        }
+    [Test]
+    public void CanConstruct()
+    {
+        var instance = new GetAgenciesQueryHandler(_rofjaaDataContext, _dateTimeProvider.Object);
+        instance.Should().NotBeNull();
     }
 }

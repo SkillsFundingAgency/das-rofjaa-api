@@ -1,25 +1,16 @@
-using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies;
-using System;
+using FluentAssertions;
 using NUnit.Framework;
+using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies;
 
-namespace SFA.DAS.Rofjaa.Application.UnitTests.Agencies.Queries.GetAgencies
+namespace SFA.DAS.Rofjaa.Application.UnitTests.Agencies;
+
+[TestFixture]
+public class GetAgenciesQueryTests
 {
-    [TestFixture]
-    public class GetAgenciesQueryTests
+    [Test]
+    public void CanConstruct()
     {
-        private GetAgenciesQuery _testClass;
-
-        [SetUp]
-        public void SetUp()
-        {
-            _testClass = new GetAgenciesQuery();
-        }
-
-        [Test]
-        public void CanConstruct()
-        {
-            var instance = new GetAgenciesQuery();
-            Assert.That(instance, Is.Not.Null);
-        }
+        var instance = new GetAgenciesQuery();
+        instance.Should().NotBeNull();
     }
 }

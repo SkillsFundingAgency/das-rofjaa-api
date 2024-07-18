@@ -60,10 +60,10 @@ public class AgenciesControllerTests
 
         var result = new GetAgenciesResult { Items = expectedAgencies.ToList() };
 
-        foreach (var a in result.Items)
+        foreach (var agency in result.Items)
         {
-            a.EffectiveFrom = new DateTime(2010, 01, 01);
-            a.EffectiveTo = new DateTime(2020, 01, 01);
+            agency.EffectiveFrom = new DateTime(2010, 01, 01);
+            agency.EffectiveTo = new DateTime(2020, 01, 01);
         }
 
         _mockMediator
@@ -90,12 +90,12 @@ public class AgenciesControllerTests
         // Arrange
         var expectedAgencies = _fixture.CreateMany<GetAgenciesResult.Agency>();
 
-        var result = new GetAgenciesResult() { Items = expectedAgencies.ToList() };
+        var result = new GetAgenciesResult { Items = expectedAgencies.ToList() };
 
-        foreach (var a in result.Items)
+        foreach (var agency in result.Items)
         {
-            a.EffectiveFrom = new DateTime(2020, 01, 01);
-            a.EffectiveTo = new DateTime(2030, 01, 01);
+            agency.EffectiveFrom = new DateTime(2020, 01, 01);
+            agency.EffectiveTo = new DateTime(2030, 01, 01);
         }
 
         _mockMediator
@@ -122,7 +122,7 @@ public class AgenciesControllerTests
         // Arrange
         var expectedAgencies = _fixture.CreateMany<GetAgenciesResult.Agency>();
 
-        var result = new GetAgenciesResult() { Items = expectedAgencies.ToList() };
+        var result = new GetAgenciesResult { Items = expectedAgencies.ToList() };
 
         _mockMediator
             .Setup(x => x.Send(It.Is<GetAgenciesQuery>(x => x != null), It.IsAny<CancellationToken>()))
