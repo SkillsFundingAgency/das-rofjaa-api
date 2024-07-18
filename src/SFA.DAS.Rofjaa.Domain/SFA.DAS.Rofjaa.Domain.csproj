@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ProjectGuid>44F09FAD-FC66-4D24-B59E-C131ABA6F658</ProjectGuid>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Extensions\**" />
