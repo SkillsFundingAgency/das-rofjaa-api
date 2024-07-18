@@ -2,7 +2,7 @@ using System;
 using FluentAssertions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Logging;
-using NSubstitute;
+using Moq;
 using NUnit.Framework;
 using SFA.DAS.Rofjaa.Api.AppStart;
 
@@ -14,7 +14,7 @@ public static class ExceptionMiddlewareExtensionsTests
     [Test]
     public static void CannotCallConfigureExceptionHandlerWithNullApp()
     {
-        var action = () => default(IApplicationBuilder).ConfigureExceptionHandler(Substitute.For<ILogger>());
+        var action = () => default(IApplicationBuilder).ConfigureExceptionHandler(Mock.Of<ILogger>());
         action.Should().Throw<ArgumentNullException>();
     }
 }

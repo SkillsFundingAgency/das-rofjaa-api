@@ -20,6 +20,9 @@ public class GetAgenciesQueryHandlerTests
         _dateTimeProvider = new Mock<IDateTimeProvider>();
     }
 
+    [TearDown]
+    public void TearDown() => _rofjaaDataContext?.Dispose();
+
     [Test]
     public void CanConstruct()
     {
