@@ -3,71 +3,69 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using SFA.DAS.Rofjaa.Data.Configuration;
 using SFA.DAS.Rofjaa.Domain.Configuration;
+using SFA.DAS.Rofjaa.Domain.Entities;
 
-namespace SFA.DAS.Rofjaa.Data
+namespace SFA.DAS.Rofjaa.Data;
+
+public interface IRofjaaDataContext
 {
-    public interface IRofjaaDataContext
-    {
-        DbSet<Domain.Entities.Agency> Agency { get; set; }
+    DbSet<Agency> Agency { get; set; }
     
-        int SaveChanges();
+    int SaveChanges();
+}
+
+[ExcludeFromCodeCoverage]
+public class RofjaaDataContext : DbContext, IRofjaaDataContext
+{
+    private const string AzureResource = "https://database.windows.net/";
+
+    public DbSet<Agency> Agency { get; set; }
+
+    private readonly RofjaaConfiguration _configuration;
+    private readonly AzureServiceTokenProvider _azureServiceTokenProvider;
+     
+    public RofjaaDataContext()
+    {
     }
 
-    [ExcludeFromCodeCoverage]
-    public partial class RofjaaDataContext : DbContext, IRofjaaDataContext
+    public RofjaaDataContext(DbContextOptions options) : base(options)
     {
-        private const string AzureResource = "https://database.windows.net/";
+    }
+        
+    public RofjaaDataContext(IOptions<RofjaaConfiguration> config, DbContextOptions options, AzureServiceTokenProvider azureServiceTokenProvider) :base(options)
+    {
+        _configuration = config.Value;
+        _azureServiceTokenProvider = azureServiceTokenProvider;
+    }
 
-        public DbSet<Domain.Entities.Agency> Agency { get; set; }
-
-        private readonly RofjaaConfiguration _configuration;
-        private readonly AzureServiceTokenProvider _azureServiceTokenProvider;
-     
-        public RofjaaDataContext()
-        {
-        }
-
-        public RofjaaDataContext(DbContextOptions options) : base(options)
-        {
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseLazyLoadingProxies();
             
-        }
-        public RofjaaDataContext(IOptions<RofjaaConfiguration> config, DbContextOptions options, AzureServiceTokenProvider azureServiceTokenProvider) :base(options)
+        if (_configuration == null || _azureServiceTokenProvider == null)
         {
-            _configuration = config.Value;
-            _azureServiceTokenProvider = azureServiceTokenProvider;
+            return;
         }
+            
+        var connection = new SqlConnection
+        {
+            ConnectionString = _configuration.ConnectionString,
+            AccessToken = _azureServiceTokenProvider.GetAccessTokenAsync(AzureResource).Result,
+        };
+            
+        optionsBuilder.UseSqlServer(connection,options=>
+            options.EnableRetryOnFailure(
+                5,
+                TimeSpan.FromSeconds(20),
+                null
+            ));
+    }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseLazyLoadingProxies();
-            
-            if (_configuration == null || _azureServiceTokenProvider == null)
-            {
-                return;
-            }
-            
-            var connection = new SqlConnection
-            {
-                ConnectionString = _configuration.ConnectionString,
-                AccessToken = _azureServiceTokenProvider.GetAccessTokenAsync(AzureResource).Result,
-            };
-            
-            optionsBuilder.UseSqlServer(connection,options=>
-                options.EnableRetryOnFailure(
-                    5,
-                    TimeSpan.FromSeconds(20),
-                    null
-                ));
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfiguration(new Agency());
-            base.OnModelCreating(modelBuilder);
-        }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfiguration(new Configuration.Agency());
+        base.OnModelCreating(modelBuilder);
     }
 }

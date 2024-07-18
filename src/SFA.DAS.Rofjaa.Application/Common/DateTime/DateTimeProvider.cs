@@ -1,14 +1,14 @@
-﻿using System;
-using System.Globalization;
-using SFA.DAS.Rofjaa.Application.Common.DateTime;
+﻿namespace SFA.DAS.Rofjaa.Application.Common.DateTime;
 
-namespace SFA.DAS.Rofjaa.Application.Common.DateTime
+public interface IDateTimeProvider
 {
-    public sealed class DateTimeProvider : IDateTimeProvider
+    System.DateTime GetNowUtc();
+}
+
+public sealed class DateTimeProvider : IDateTimeProvider
+{
+    public System.DateTime GetNowUtc()
     {
-        public System.DateTime GetNowUtc()
-        {
-            return System.DateTime.UtcNow;
-        }
+        return System.DateTime.UtcNow;
     }
 }
