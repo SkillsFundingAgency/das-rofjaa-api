@@ -23,12 +23,12 @@ public static class DbUtilities
     {
         return new List<Agency>
         {
-            new Agency
+            new()
             {
                 LegalEntityId = 1,
                 IsGrantFunded = true
             },
-            new Agency
+            new()
             {
                 LegalEntityId = 2,
                 IsGrantFunded = false

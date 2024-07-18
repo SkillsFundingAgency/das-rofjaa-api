@@ -1,18 +1,16 @@
-namespace SFA.DAS.Rofjaa.Api.UnitTests.AppStart
-{
-    using SFA.DAS.Rofjaa.Api.AppStart;
-    using System;
-    using NUnit.Framework;
-    using NSubstitute;
-    using Microsoft.AspNetCore.Builder;
+using System;
+using Microsoft.AspNetCore.Builder;
+using NUnit.Framework;
+using SFA.DAS.Rofjaa.Api.AppStart;
 
-    [TestFixture]
-    public static class HealthCheckStartupTests
+namespace SFA.DAS.Rofjaa.Api.UnitTests.Api;
+
+[TestFixture]
+public static class HealthCheckStartupTests
+{
+    [Test]
+    public static void CannotCallUseHealthChecksWithNullApp()
     {
-        [Test]
-        public static void CannotCallUseHealthChecksWithNullApp()
-        {
             Assert.Throws<ArgumentNullException>(() => default(IApplicationBuilder).UseHealthChecks());
         }
-    }
 }

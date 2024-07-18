@@ -8,8 +8,7 @@ public static class HttpUtilities
 {
     public static async Task<T> ReadContent<T>(HttpContent httpContent)
     {
-            var json = await httpContent.ReadAsStringAsync();
-            var model = JsonConvert.DeserializeObject<T>(json);
-            return model;
-        }
+        var json = await httpContent.ReadAsStringAsync();
+        return JsonConvert.DeserializeObject<T>(json);
+    }
 }

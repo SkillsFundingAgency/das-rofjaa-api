@@ -20,10 +20,10 @@ public class AcceptanceTestingWebApplicationFactory<TStartup> : WebApplicationFa
         {
             configurationBuilder.AddInMemoryCollection(new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string, string>("ConfigurationStorageConnectionString", "UseDevelopmentStorage=true;"),
-                new KeyValuePair<string, string>("ConfigNames", "SFA.DAS.Rofjaa.Api"),
-                new KeyValuePair<string, string>("EnvironmentName", "DEV"),
-                new KeyValuePair<string, string>("Version", "1.0")
+                new("ConfigurationStorageConnectionString", "UseDevelopmentStorage=true;"),
+                new("ConfigNames", "SFA.DAS.Rofjaa.Api"),
+                new("EnvironmentName", "DEV"),
+                new("Version", "1.0")
             });
         });
             
@@ -41,31 +41,26 @@ public class AcceptanceTestingWebApplicationFactory<TStartup> : WebApplicationFa
                 options.EnableSensitiveDataLogging();
             });
             services.AddTransient(provider => new Lazy<RofjaaDataContext>(provider.GetService<RofjaaDataContext>()));
-
                 
             var sp = services.BuildServiceProvider();
 
-            using (var scope = sp.CreateScope())
+            using var scope = sp.CreateScope();
+            
+            var scopedServices = scope.ServiceProvider;
+            var db = scopedServices.GetRequiredService<RofjaaDataContext>();
+            var logger = scopedServices.GetRequiredService<ILogger<AcceptanceTestingWebApplicationFactory<TStartup>>>();
+
+            db.Database.EnsureCreated();
+
+            try
             {
-                var scopedServices = scope.ServiceProvider;
-                var db = scopedServices.GetRequiredService<RofjaaDataContext>();
-                var logger = scopedServices
-                    .GetRequiredService<ILogger<AcceptanceTestingWebApplicationFactory<TStartup>>>();
-
-                db.Database.EnsureCreated();
-
-                try
-                {
-                    DbUtilities.LoadTestData(db);
-                }
-                catch (Exception ex)
-                {
-                    logger.LogError(ex, "An error occurred seeding the database. Error: {Message}", ex.Message);
-                    throw;
-                }
+                DbUtilities.LoadTestData(db);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An error occurred seeding the database. Error: {Message}", ex.Message);
+                throw;
             }
         });
-
-            
     }
 }
