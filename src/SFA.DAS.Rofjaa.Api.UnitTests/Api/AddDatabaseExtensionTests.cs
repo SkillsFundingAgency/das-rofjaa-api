@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using SFA.DAS.Rofjaa.Api.AppStart;
@@ -12,6 +13,7 @@ public static class AddDatabaseExtensionTests
     [Test]
     public static void CannotCallAddDatabaseRegistrationWithNullServices()
     {
-        Assert.Throws<ArgumentNullException>(() => default(IServiceCollection).AddDatabaseRegistration(new RofjaaConfiguration { ConnectionString = "TestValue83455063" }, "TestValue1873433359"));
+        var action = () => default(IServiceCollection).AddDatabaseRegistration(new RofjaaConfiguration { ConnectionString = "TestValue83455063" }, "TestValue1873433359");
+        action.Should().Throw<ArgumentNullException>();
     }
 }

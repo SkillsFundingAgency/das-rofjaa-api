@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using Microsoft.AspNetCore.Builder;
 using NUnit.Framework;
 using SFA.DAS.Rofjaa.Api.AppStart;
@@ -9,8 +10,9 @@ namespace SFA.DAS.Rofjaa.Api.UnitTests.Api;
 public static class HealthCheckStartupTests
 {
     [Test]
-    public static void CannotCallUseHealthChecksWithNullApp()
+    public static void CannotCallUseHealthChecksWithNullApp() 
     {
-            Assert.Throws<ArgumentNullException>(() => default(IApplicationBuilder).UseHealthChecks());
-        }
+        var action = () => default(IApplicationBuilder).UseHealthChecks();
+        action.Should().Throw<ArgumentNullException>();
+    }
 }

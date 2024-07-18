@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
@@ -13,6 +14,7 @@ public static class ExceptionMiddlewareExtensionsTests
     [Test]
     public static void CannotCallConfigureExceptionHandlerWithNullApp()
     {
-        Assert.Throws<ArgumentNullException>(() => default(IApplicationBuilder).ConfigureExceptionHandler(Substitute.For<ILogger>()));
+        var action = () => default(IApplicationBuilder).ConfigureExceptionHandler(Substitute.For<ILogger>());
+        action.Should().Throw<ArgumentNullException>();
     }
 }

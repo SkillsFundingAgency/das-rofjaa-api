@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
+using FluentAssertions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -45,9 +47,9 @@ public class AgenciesControllerTests
         var notFoundResult = actionResult as NotFoundResult;
 
         // Assert
-        Assert.IsNotNull(actionResult);
-        Assert.IsNotNull(notFoundResult);
-        Assert.AreEqual(notFoundResult.StatusCode, (int)HttpStatusCode.NotFound);
+        actionResult.Should().NotBeNull();
+        notFoundResult.Should().NotBeNull();
+        notFoundResult.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
     }
 
     [Test]
@@ -56,15 +58,12 @@ public class AgenciesControllerTests
         // Arrange
         var expectedAgencies = _fixture.CreateMany<GetAgenciesResult.Agency>();
 
-        var result = new GetAgenciesResult()
-        {
-            Items = expectedAgencies.ToList()
-        };
+        var result = new GetAgenciesResult { Items = expectedAgencies.ToList() };
 
-        foreach(var a in result.Items)
+        foreach (var a in result.Items)
         {
-            a.EffectiveFrom = new System.DateTime(2010, 01, 01);
-            a.EffectiveTo = new System.DateTime(2020, 01, 01);
+            a.EffectiveFrom = new DateTime(2010, 01, 01);
+            a.EffectiveTo = new DateTime(2020, 01, 01);
         }
 
         _mockMediator
@@ -77,12 +76,12 @@ public class AgenciesControllerTests
         var response = okObjectResult.Value as GetAgenciesResponse;
 
         // Assert
-        Assert.IsNotNull(actionResult);
-        Assert.IsNotNull(okObjectResult);
-        Assert.IsNotNull(response);
-        Assert.AreEqual(okObjectResult.StatusCode, (int)HttpStatusCode.OK);
+        actionResult.Should().NotBeNull();
+        okObjectResult.Should().NotBeNull();
+        response.Should().NotBeNull();
+        okObjectResult.StatusCode.Should().Be((int)HttpStatusCode.OK);
 
-        Assert.AreEqual(expectedAgencies.Count(), response.Agencies.Count());
+        response.Agencies.Count().Should().Be(expectedAgencies.Count());
     }
 
     [Test]
@@ -91,15 +90,12 @@ public class AgenciesControllerTests
         // Arrange
         var expectedAgencies = _fixture.CreateMany<GetAgenciesResult.Agency>();
 
-        var result = new GetAgenciesResult()
-        {
-            Items = expectedAgencies.ToList()
-        };
+        var result = new GetAgenciesResult() { Items = expectedAgencies.ToList() };
 
-        foreach(var a in result.Items)
+        foreach (var a in result.Items)
         {
-            a.EffectiveFrom = new System.DateTime(2020,01,01);
-            a.EffectiveTo = new System.DateTime(2030,01,01);
+            a.EffectiveFrom = new DateTime(2020, 01, 01);
+            a.EffectiveTo = new DateTime(2030, 01, 01);
         }
 
         _mockMediator
@@ -112,12 +108,12 @@ public class AgenciesControllerTests
         var response = okObjectResult.Value as GetAgenciesResponse;
 
         // Assert
-        Assert.IsNotNull(actionResult);
-        Assert.IsNotNull(okObjectResult);
-        Assert.IsNotNull(response);
-        Assert.AreEqual(okObjectResult.StatusCode, (int)HttpStatusCode.OK);
+        actionResult.Should().NotBeNull();
+        okObjectResult.Should().NotBeNull();
+        response.Should().NotBeNull();
+        okObjectResult.StatusCode.Should().Be((int)HttpStatusCode.OK);
 
-        Assert.AreEqual(expectedAgencies.Count(), response.Agencies.Count());
+        response.Agencies.Count().Should().Be(expectedAgencies.Count());
     }
 
     [Test]
@@ -126,10 +122,7 @@ public class AgenciesControllerTests
         // Arrange
         var expectedAgencies = _fixture.CreateMany<GetAgenciesResult.Agency>();
 
-        var result = new GetAgenciesResult()
-        {
-            Items = expectedAgencies.ToList()
-        };
+        var result = new GetAgenciesResult() { Items = expectedAgencies.ToList() };
 
         _mockMediator
             .Setup(x => x.Send(It.Is<GetAgenciesQuery>(x => x != null), It.IsAny<CancellationToken>()))
@@ -141,11 +134,11 @@ public class AgenciesControllerTests
         var response = okObjectResult.Value as GetAgenciesResponse;
 
         // Assert
-        Assert.IsNotNull(actionResult);
-        Assert.IsNotNull(okObjectResult);
-        Assert.IsNotNull(response);
-        Assert.AreEqual(okObjectResult.StatusCode, (int)HttpStatusCode.OK);
+        actionResult.Should().NotBeNull();
+        okObjectResult.Should().NotBeNull();
+        response.Should().NotBeNull();
+        okObjectResult.StatusCode.Should().Be((int)HttpStatusCode.OK);
 
-        Assert.AreEqual(expectedAgencies.Count(), response.Agencies.Count());
+        response.Agencies.Count().Should().Be(expectedAgencies.Count());
     }
 }
