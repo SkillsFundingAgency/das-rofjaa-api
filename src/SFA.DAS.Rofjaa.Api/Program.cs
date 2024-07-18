@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using NLog;
 using NLog.Web;
 
 namespace SFA.DAS.Rofjaa.Api;
@@ -10,7 +11,7 @@ public static class Program
 {
     public static void Main(string[] args)
     {
-        NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+        LogManager.Setup().LoadConfigurationFromFile("nlog.config").GetCurrentClassLogger();
         CreateHostBuilder(args).Build().Run();
     }
 
