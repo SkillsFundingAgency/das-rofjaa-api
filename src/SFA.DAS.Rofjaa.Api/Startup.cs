@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 using System.Text.Json.Serialization;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -52,12 +50,15 @@ public class Startup
             var policies = new Dictionary<string, string> { { PolicyNames.Default, RoleNames.Default } };
 
             services.AddAuthentication(azureAdConfiguration, policies);
+        }
 
+        if (!_configuration.IsDev())
+        {
             services.AddHealthChecks()
                 .AddDbContextCheck<RofjaaDataContext>();
         }
 
-        services.AddMediatR(typeof(GetAgencyResult).GetTypeInfo().Assembly);
+        services.AddMediatR(x => x.RegisterServicesFromAssembly(typeof(GetAgencyResult).Assembly));
 
         services.AddDatabaseRegistration(rofjaaConfiguration, _configuration["EnvironmentName"]);
 
@@ -108,7 +109,7 @@ public class Startup
 
         app.UseAuthentication();
 
-        if (!_configuration.IsLocalOrDev())
+        if (!_configuration.IsDev())
         {
             app.UseHealthChecks();
         }

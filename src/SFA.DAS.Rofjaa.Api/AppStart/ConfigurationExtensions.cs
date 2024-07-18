@@ -18,31 +18,42 @@ public static class ConfigurationExtensions
             .AddConfiguration(configuration)
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddEnvironmentVariables();
-
-#if DEBUG
-        if (configuration.IsLocalOrDev())
+        
+        if (!configuration["EnvironmentName"].Equals("DEV", StringComparison.CurrentCultureIgnoreCase))
         {
-            config.AddJsonFile("appsettings.json", true)
+#if DEBUG
+            config
+                .AddJsonFile("appsettings.json", true)
                 .AddJsonFile("appsettings.Development.json", true);
-        }
 #endif
 
-        config.AddAzureTableStorage(options =>
-            {
-                options.ConfigurationKeys = configuration["ConfigNames"].Split(",");
-                options.StorageConnectionString = configuration["ConfigurationStorageConnectionString"];
-                options.EnvironmentName = configuration["EnvironmentName"];
-                options.PreFixConfigurationKeys = false;
-            }
-        );
+            config.AddAzureTableStorage(options =>
+                {
+                    options.ConfigurationKeys = configuration["ConfigNames"].Split(",");
+                    options.StorageConnectionString = configuration["ConfigurationStorageConnectionString"];
+                    options.EnvironmentName = configuration["EnvironmentName"];
+                    options.PreFixConfigurationKeys = false;
+                }
+            );
+        }
 
         return config.Build();
     }
 
     public static bool IsLocalOrDev(this IConfiguration configuration)
     {
-        return configuration["EnvironmentName"].Equals("LOCAL", StringComparison.CurrentCultureIgnoreCase) ||
-               configuration["EnvironmentName"].Equals("DEV", StringComparison.CurrentCultureIgnoreCase);
+        return configuration.IsDev() ||
+               configuration.IsLocal();
+    }
+    
+    public static bool IsDev(this IConfiguration configuration)
+    {
+        return configuration["EnvironmentName"].Equals("DEV", StringComparison.CurrentCultureIgnoreCase);
+    }
+    
+    public static bool IsLocal(this IConfiguration configuration)
+    {
+        return configuration["EnvironmentName"].Equals("LOCAL", StringComparison.CurrentCultureIgnoreCase);
     }
 
     public static IServiceCollection AddConfigurationOptions(this IServiceCollection services, IConfiguration configuration)
