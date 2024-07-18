@@ -6,29 +6,29 @@ using SFA.DAS.Rofjaa.Api.AcceptanceTests.Infrastructure;
 using TechTalk.SpecFlow;
 using HttpMethod = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpMethod;
 
-namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Steps
-{
-    [Binding]
-    public class HttpSteps
-    {
-        private readonly ScenarioContext _context;
+namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Steps;
 
-        public HttpSteps(ScenarioContext context)
-        {
+[Binding]
+public class HttpSteps
+{
+    private readonly ScenarioContext _context;
+
+    public HttpSteps(ScenarioContext context)
+    {
             _context = context;
         }
 
-        [Given("I have an http client")]
-        public void GivenIHaveAnHttpClient()
-        {
+    [Given("I have an http client")]
+    public void GivenIHaveAnHttpClient()
+    {
             var client = new AcceptanceTestingWebApplicationFactory<Startup>().CreateClient();
             client.DefaultRequestHeaders.Add("X-Version", "1.0");
             _context.Set(client, ContextKeys.HttpClient);
         }
 
-        [When("I (GET|POST|PUT|DELETE) the following url: (.*)")]
-        public async Task WhenIMethodTheFollowingUrl(HttpMethod method, string url)
-        {
+    [When("I (GET|POST|PUT|DELETE) the following url: (.*)")]
+    public async Task WhenIMethodTheFollowingUrl(HttpMethod method, string url)
+    {
             var client = _context.Get<HttpClient>(ContextKeys.HttpClient);
 
             HttpResponseMessage response = null;
@@ -64,9 +64,9 @@ namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Steps
             _context.Set(response, ContextKeys.HttpResponse);
         }
 
-        [Then("an http status code of (.*) is returned")]
-        public void ThenAnHttpStatusCodeIsReturned(int httpStatusCode)
-        {
+    [Then("an http status code of (.*) is returned")]
+    public void ThenAnHttpStatusCodeIsReturned(int httpStatusCode)
+    {
             if (!_context.TryGetValue<HttpResponseMessage>(ContextKeys.HttpResponse, out var result))
             {
                 Assert.Fail($"scenario context does not contain value for key [{ContextKeys.HttpResponse}]");
@@ -74,5 +74,4 @@ namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Steps
 
             result.StatusCode.Should().Be((System.Net.HttpStatusCode)httpStatusCode);
         }
-    }
 }
