@@ -1,19 +1,16 @@
 using FluentAssertions;
 using NUnit.Framework;
-using SFA.DAS.Rofjaa.Domain.Entities;
 using SFA.DAS.Testing.AutoFixture;
 
-namespace SFA.DAS.Rofjaa.Domain.UnitTests.Courses
+namespace SFA.DAS.Rofjaa.Domain.UnitTests.Agency;
+
+public class WhenCastingToAgencyFromEntity
 {
-    public class WhenCastingToAgencyFromEntity
+    [Test, RecursiveMoqAutoData]
+    public void Then_The_Fields_Are_Correctly_Mapped(Entities.Agency agency)
     {
-        [Test, RecursiveMoqAutoData]
-        public void Then_The_Fields_Are_Correctly_Mapped(Agency agency)
-        {
-            var actual = (Domain.Entities.Agency) agency;
+        var actual = (Domain.Entities.Agency)agency;
             
-            actual.Should().BeEquivalentTo(agency);
-          
-        }
+        actual.Should().BeEquivalentTo(agency);
     }
 }
