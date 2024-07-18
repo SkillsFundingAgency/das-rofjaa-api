@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SFA.DAS.Rofjaa.Data;
-using Agency = SFA.DAS.Rofjaa.Domain.Entities.Agency;
+using SFA.DAS.Rofjaa.Domain.Entities;
 
 namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Infrastructure;
 
@@ -9,7 +9,13 @@ public static class DbUtilities
 {
     public static void LoadTestData(RofjaaDataContext context)
     {
-        context.Agency.AddRange(GetAgencies());
+        if (context.Agency.Any())
+        {
+            return;
+        }
+
+        var agencies = GetAgencies();
+        context.Agency.AddRange(agencies);
         context.SaveChanges();
     }
 
@@ -21,19 +27,7 @@ public static class DbUtilities
 
     public static IEnumerable<Agency> GetAgencies()
     {
-        return new List<Agency>
-        {
-            new()
-            {
-                LegalEntityId = 1,
-                IsGrantFunded = true
-            },
-            new()
-            {
-                LegalEntityId = 2,
-                IsGrantFunded = false
-            },
-        };
+        return new List<Agency> { new() { LegalEntityId = 1, IsGrantFunded = true }, new() { LegalEntityId = 2, IsGrantFunded = false }, };
     }
 
     public static Agency GetAgency(long id)
