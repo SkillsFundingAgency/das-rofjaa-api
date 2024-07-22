@@ -13,7 +13,7 @@ namespace SFA.DAS.Rofjaa.Api.Controllers;
 [ApiController]
 [Route("agencies/")]
 public class AgenciesController(IMediator mediator, ILogger<AgenciesController> logger) : ControllerBase
-{  
+{
     [HttpGet]
     [Route("{legalEntityId}")]
     public async Task<IActionResult> Get(long legalEntityId)
