@@ -18,7 +18,7 @@ public class AgenciesController(IMediator mediator, ILogger<AgenciesController> 
     [Route("{legalEntityId}")]
     public async Task<IActionResult> Get(long legalEntityId)
     {
-        logger.LogInformation($"Get called for legalEntityId {legalEntityId}");
+        logger.LogInformation("Get called for legalEntityId {legalEntityId}", legalEntityId);
         var result = await mediator.Send(new GetAgencyQuery { LegalEntityId = legalEntityId });
 
         if (result == null) return NotFound();
