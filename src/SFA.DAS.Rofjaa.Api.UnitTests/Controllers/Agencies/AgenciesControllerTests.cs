@@ -7,7 +7,6 @@ using AutoFixture;
 using FluentAssertions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using SFA.DAS.Rofjaa.Api.ApiResponses;
@@ -28,7 +27,7 @@ public class AgenciesControllerTests
     {
         _fixture = new Fixture();
         _mockMediator = new Mock<IMediator>();
-        _agenciesController = new AgenciesController(_mockMediator.Object, Mock.Of<ILogger<AgenciesController>>());
+        _agenciesController = new AgenciesController(_mockMediator.Object);
     }
 
     [Test]
