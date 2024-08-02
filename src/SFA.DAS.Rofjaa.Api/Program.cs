@@ -1,22 +1,21 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using NLog.Web;
+using Microsoft.Extensions.Hosting;
 
-namespace SFA.DAS.Rofjaa.Api
+namespace SFA.DAS.Rofjaa.Api;
+
+[ExcludeFromCodeCoverage]
+public static class Program
 {
-    [ExcludeFromCodeCoverage]
-    public static class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-            CreateWebHostBuilder(args).Build().Run();
-        }
-
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseNLog();
+        CreateHostBuilder(args).Build().Run();
     }
+
+    private static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(builder =>
+            {
+                builder.UseStartup<Startup>();
+            });
 }

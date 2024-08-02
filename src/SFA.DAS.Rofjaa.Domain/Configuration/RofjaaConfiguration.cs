@@ -1,7 +1,6 @@
-namespace SFA.DAS.Rofjaa.Domain.Configuration
+namespace SFA.DAS.Rofjaa.Domain.Configuration;
+
+public class RofjaaConfiguration
 {
-    public class RofjaaConfiguration
-    {
-        public string ConnectionString { get ; set ; }
-    }
+    public string ConnectionString { get ; set ; }
 }

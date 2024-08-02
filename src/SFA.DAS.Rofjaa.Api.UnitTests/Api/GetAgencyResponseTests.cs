@@ -1,41 +1,40 @@
-namespace SFA.DAS.Rofjaa.Api.UnitTests.ApiResponses
+using FluentAssertions;
+using NUnit.Framework;
+using SFA.DAS.Rofjaa.Api.ApiResponses;
+
+namespace SFA.DAS.Rofjaa.Api.UnitTests.Api;
+
+[TestFixture]
+public class GetAgencyResponseTests
 {
-    using SFA.DAS.Rofjaa.Api.ApiResponses;
-    using System;
-    using NUnit.Framework;
+    private GetAgencyResponse _testClass;
 
-    [TestFixture]
-    public class GetAgencyResponseTests
+    [SetUp]
+    public void SetUp()
     {
-        private GetAgencyResponse _testClass;
+        _testClass = new GetAgencyResponse();
+    }
 
-        [SetUp]
-        public void SetUp()
-        {
-            _testClass = new GetAgencyResponse();
-        }
+    [Test]
+    public void CanConstruct()
+    {
+        var instance = new GetAgencyResponse();
+        instance.Should().NotBeNull();
+    }
 
-        [Test]
-        public void CanConstruct()
-        {
-            var instance = new GetAgencyResponse();
-            Assert.That(instance, Is.Not.Null);
-        }
+    [Test]
+    public void CanSetAndGetLegalEntityId()
+    {
+        const long testValue = 1806481352;
+        _testClass.LegalEntityId = testValue;
+        testValue.Should().Be(_testClass.LegalEntityId);
+    }
 
-        [Test]
-        public void CanSetAndGetLegalEntityId()
-        {
-            var testValue = 1806481352;
-            _testClass.LegalEntityId = testValue;
-            Assert.That(_testClass.LegalEntityId, Is.EqualTo(testValue));
-        }
-
-        [Test]
-        public void CanSetAndGetIsGrantFunded()
-        {
-            var testValue = true;
-            _testClass.IsGrantFunded = testValue;
-            Assert.That(_testClass.IsGrantFunded, Is.EqualTo(testValue));
-        }
+    [Test]
+    public void CanSetAndGetIsGrantFunded()
+    {
+        const bool testValue = true;
+        _testClass.IsGrantFunded = testValue;
+        testValue.Should().Be(_testClass.IsGrantFunded);
     }
 }

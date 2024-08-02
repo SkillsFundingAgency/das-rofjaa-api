@@ -1,4 +1,10 @@
-﻿using AutoFixture;
+﻿using System;
+using System.Linq;
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoFixture;
+using FluentAssertions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -6,148 +12,133 @@ using NUnit.Framework;
 using SFA.DAS.Rofjaa.Api.ApiResponses;
 using SFA.DAS.Rofjaa.Api.Controllers;
 using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies;
-using SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgency;
-using System.Linq;
-using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace SFA.DAS.Rofjaa.Api.UnitTests.Controllers
+namespace SFA.DAS.Rofjaa.Api.UnitTests.Controllers.Agencies;
+
+[TestFixture]
+public class AgenciesControllerTests
 {
-    [TestFixture]
-    public class AgenciesControllerTests
+    private Fixture _fixture;
+    private Mock<IMediator> _mockMediator;
+    private AgenciesController _agenciesController;
+
+    [SetUp]
+    public void Setup()
     {
-        private Fixture _fixture;
-        private Mock<IMediator> _mockMediator;
-        private AgenciesController _agenciesController;
+        _fixture = new Fixture();
+        _mockMediator = new Mock<IMediator>();
+        _agenciesController = new AgenciesController(_mockMediator.Object);
+    }
 
-        [SetUp]
-        public void Setup()
+    [Test]
+    public async Task Agency_Requested_Doesnt_Exist_NotFound_Returned()
+    {
+        // Arrange
+        var id = _fixture.Create<long>();
+
+        var result = new GetAgenciesResult();
+
+        _mockMediator
+            .Setup(x => x.Send(It.Is<GetAgenciesQuery>(x => x != null), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(result);
+
+        // Act
+        var actionResult = await _agenciesController.Get(id);
+        var notFoundResult = actionResult as NotFoundResult;
+
+        // Assert
+        actionResult.Should().NotBeNull();
+        notFoundResult.Should().NotBeNull();
+        notFoundResult.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
+    }
+
+    [Test]
+    public async Task Agencies_Outside_Current_Date_Are_Not_Returned()
+    {
+        // Arrange
+        var expectedAgencies = _fixture.CreateMany<GetAgenciesResult.Agency>();
+
+        var result = new GetAgenciesResult { Items = expectedAgencies.ToList() };
+
+        foreach (var agency in result.Items)
         {
-            _fixture = new Fixture();
-            _mockMediator = new Mock<IMediator>();
-            _agenciesController = new AgenciesController(_mockMediator.Object);
+            agency.EffectiveFrom = new DateTime(2010, 01, 01);
+            agency.EffectiveTo = new DateTime(2020, 01, 01);
         }
 
-        [Test]
-        public async Task Agency_Requested_Doesnt_Exist_NotFound_Returned()
+        _mockMediator
+            .Setup(x => x.Send(It.Is<GetAgenciesQuery>(x => x != null), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(result);
+
+        // Act
+        var actionResult = await _agenciesController.GetList();
+        var okObjectResult = actionResult as OkObjectResult;
+        var response = okObjectResult.Value as GetAgenciesResponse;
+
+        // Assert
+        actionResult.Should().NotBeNull();
+        okObjectResult.Should().NotBeNull();
+        response.Should().NotBeNull();
+        okObjectResult.StatusCode.Should().Be((int)HttpStatusCode.OK);
+
+        response.Agencies.Count().Should().Be(expectedAgencies.Count());
+    }
+
+    [Test]
+    public async Task Agencies_Inside_Current_Date_Are_Returned()
+    {
+        // Arrange
+        var expectedAgencies = _fixture.CreateMany<GetAgenciesResult.Agency>();
+
+        var result = new GetAgenciesResult { Items = expectedAgencies.ToList() };
+
+        foreach (var agency in result.Items)
         {
-            // Arrange
-            var id = _fixture.Create<long>();
-
-            var result = new GetAgenciesResult();
-
-            _mockMediator
-               .Setup(x => x.Send(It.Is<GetAgenciesQuery>(x => x != null), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(result);
-
-            // Act
-            var actionResult = await _agenciesController.Get(id);
-            var notFoundResult = actionResult as NotFoundResult;
-
-            // Assert
-            Assert.IsNotNull(actionResult);
-            Assert.IsNotNull(notFoundResult);
-            Assert.AreEqual(notFoundResult.StatusCode, (int)HttpStatusCode.NotFound);
+            agency.EffectiveFrom = new DateTime(2020, 01, 01);
+            agency.EffectiveTo = new DateTime(2030, 01, 01);
         }
 
-        [Test]
-        public async Task Agencies_Outside_Current_Date_Are_Not_Returned()
-        {
-            // Arrange
-            var expectedAgencies = _fixture.CreateMany<GetAgenciesResult.Agency>();
+        _mockMediator
+            .Setup(x => x.Send(It.Is<GetAgenciesQuery>(x => x != null), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(result);
 
-            var result = new GetAgenciesResult()
-            {
-                Items = expectedAgencies.ToList()
-            };
+        // Act
+        var actionResult = await _agenciesController.GetList();
+        var okObjectResult = actionResult as OkObjectResult;
+        var response = okObjectResult.Value as GetAgenciesResponse;
 
-            foreach(var a in result.Items)
-            {
-                a.EffectiveFrom = new System.DateTime(2010, 01, 01);
-                a.EffectiveTo = new System.DateTime(2020, 01, 01);
-            }
+        // Assert
+        actionResult.Should().NotBeNull();
+        okObjectResult.Should().NotBeNull();
+        response.Should().NotBeNull();
+        okObjectResult.StatusCode.Should().Be((int)HttpStatusCode.OK);
 
-            _mockMediator
-                .Setup(x => x.Send(It.Is<GetAgenciesQuery>(x => x != null), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(result);
+        response.Agencies.Count().Should().Be(expectedAgencies.Count());
+    }
 
-            // Act
-            var actionResult = await _agenciesController.GetList();
-            var okObjectResult = actionResult as OkObjectResult;
-            var response = okObjectResult.Value as GetAgenciesResponse;
+    [Test]
+    public async Task All_Agencies_Returned()
+    {
+        // Arrange
+        var expectedAgencies = _fixture.CreateMany<GetAgenciesResult.Agency>();
 
-            // Assert
-            Assert.IsNotNull(actionResult);
-            Assert.IsNotNull(okObjectResult);
-            Assert.IsNotNull(response);
-            Assert.AreEqual(okObjectResult.StatusCode, (int)HttpStatusCode.OK);
+        var result = new GetAgenciesResult { Items = expectedAgencies.ToList() };
 
-            Assert.AreEqual(expectedAgencies.Count(), response.Agencies.Count());
-        }
+        _mockMediator
+            .Setup(x => x.Send(It.Is<GetAgenciesQuery>(x => x != null), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(result);
 
-        [Test]
-        public async Task Agencies_Inside_Current_Date_Are_Returned()
-        {
-            // Arrange
-            var expectedAgencies = _fixture.CreateMany<GetAgenciesResult.Agency>();
+        // Act
+        var actionResult = await _agenciesController.GetList();
+        var okObjectResult = actionResult as OkObjectResult;
+        var response = okObjectResult.Value as GetAgenciesResponse;
 
-            var result = new GetAgenciesResult()
-            {
-                Items = expectedAgencies.ToList()
-            };
+        // Assert
+        actionResult.Should().NotBeNull();
+        okObjectResult.Should().NotBeNull();
+        response.Should().NotBeNull();
+        okObjectResult.StatusCode.Should().Be((int)HttpStatusCode.OK);
 
-            foreach(var a in result.Items)
-            {
-                a.EffectiveFrom = new System.DateTime(2020,01,01);
-                a.EffectiveTo = new System.DateTime(2030,01,01);
-            }
-
-            _mockMediator
-                .Setup(x => x.Send(It.Is<GetAgenciesQuery>(x => x != null), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(result);
-
-            // Act
-            var actionResult = await _agenciesController.GetList();
-            var okObjectResult = actionResult as OkObjectResult;
-            var response = okObjectResult.Value as GetAgenciesResponse;
-
-            // Assert
-            Assert.IsNotNull(actionResult);
-            Assert.IsNotNull(okObjectResult);
-            Assert.IsNotNull(response);
-            Assert.AreEqual(okObjectResult.StatusCode, (int)HttpStatusCode.OK);
-
-            Assert.AreEqual(expectedAgencies.Count(), response.Agencies.Count());
-        }
-
-        [Test]
-        public async Task All_Agencies_Returned()
-        {
-            // Arrange
-            var expectedAgencies = _fixture.CreateMany<GetAgenciesResult.Agency>();
-
-            var result = new GetAgenciesResult()
-            {
-                Items = expectedAgencies.ToList()
-            };
-
-            _mockMediator
-                .Setup(x => x.Send(It.Is<GetAgenciesQuery>(x => x != null), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(result);
-
-            // Act
-            var actionResult = await _agenciesController.GetList();
-            var okObjectResult = actionResult as OkObjectResult;
-            var response = okObjectResult.Value as GetAgenciesResponse;
-
-            // Assert
-            Assert.IsNotNull(actionResult);
-            Assert.IsNotNull(okObjectResult);
-            Assert.IsNotNull(response);
-            Assert.AreEqual(okObjectResult.StatusCode, (int)HttpStatusCode.OK);
-
-            Assert.AreEqual(expectedAgencies.Count(), response.Agencies.Count());
-        }
+        response.Agencies.Count().Should().Be(expectedAgencies.Count());
     }
 }

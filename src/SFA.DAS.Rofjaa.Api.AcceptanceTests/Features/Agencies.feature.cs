@@ -35,8 +35,8 @@ namespace SFA.DAS.Rofjaa.Api.AcceptanceTests.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Agencies", "\tAs a Agency API consumer\n\tI want to retrieve agencies\n\tSo that I can use them in" +
-                    " my own application", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Agencies", "\tAs a Agency API consumer\r\n\tI want to retrieve agencies\r\n\tSo that I can use them " +
+                    "in my own application", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         

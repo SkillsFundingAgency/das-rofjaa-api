@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -7,45 +6,36 @@ using Microsoft.EntityFrameworkCore;
 using SFA.DAS.Rofjaa.Application.Common.DateTime;
 using SFA.DAS.Rofjaa.Data;
 
-namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies
+namespace SFA.DAS.Rofjaa.Application.Agencies.Queries.GetAgencies;
+
+public class GetAgenciesQueryHandler(
+    RofjaaDataContext rofjaaDataContext,
+    IDateTimeProvider dateTimeProvider)
+    : IRequestHandler<GetAgenciesQuery, GetAgenciesResult>
 {
-    public class GetAgenciesQueryHandler : IRequestHandler<GetAgenciesQuery, GetAgenciesResult>
+    public async Task<GetAgenciesResult> Handle(GetAgenciesQuery request, CancellationToken cancellationToken)
     {
-        private readonly RofjaaDataContext _rofjaaDataContext;
-        private readonly IDateTimeProvider _dateTimeProvider;
+        var agenciesQuery = rofjaaDataContext.Agency
+            .AsQueryable();
 
-        public GetAgenciesQueryHandler(RofjaaDataContext rofjaaDataContext, IDateTimeProvider dateTimeProvider)
-        {
-            _rofjaaDataContext = rofjaaDataContext;
-            _dateTimeProvider = dateTimeProvider;
-        }
-
-        public async Task<GetAgenciesResult> Handle(GetAgenciesQuery request, CancellationToken cancellationToken)
-        {
-            var agenciesQuery = _rofjaaDataContext.Agency
-                .AsQueryable();
-
-            var agencies = await agenciesQuery
-                .Where(x =>
-                    x.EffectiveFrom <= _dateTimeProvider.GetNowUtc() &&
-                    (x.EffectiveTo == null || x.EffectiveTo >= _dateTimeProvider.GetNowUtc())
-                )
-                .OrderByDescending(x => x.CreatedDate)
-                .Select(x => new GetAgenciesResult.Agency
-                {
-                    LegalEntityId = x.LegalEntityId,
-                    IsGrantFunded = x.IsGrantFunded
-                })
-                .AsNoTracking()
-                .AsSingleQuery()
-                .ToListAsync(cancellationToken);
-
-            var result = new GetAgenciesResult
+        var agencies = await agenciesQuery
+            .Where(x =>
+                x.EffectiveFrom <= dateTimeProvider.GetNowUtc() &&
+                (x.EffectiveTo == null || x.EffectiveTo >= dateTimeProvider.GetNowUtc())
+            )
+            .OrderByDescending(x => x.CreatedDate)
+            .Select(x => new GetAgenciesResult.Agency
             {
-                Items = agencies
-            };
+                LegalEntityId = x.LegalEntityId,
+                IsGrantFunded = x.IsGrantFunded
+            })
+            .AsNoTracking()
+            .AsSingleQuery()
+            .ToListAsync(cancellationToken);
 
-            return result;
-        }
+        return new GetAgenciesResult
+        {
+            Items = agencies
+        };
     }
 }
