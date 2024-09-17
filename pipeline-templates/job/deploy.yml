@@ -9,6 +9,7 @@ jobs:
 - deployment: DeployWebApp
   pool:
     name: DAS - Continuous Deployment Agents
+    demands: Agent.OS -equals Windows_NT
   environment: ${{ parameters.Environment }}
   strategy:
     runOnce:
