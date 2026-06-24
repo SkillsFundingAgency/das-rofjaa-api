@@ -93,8 +93,14 @@ public class Startup
         {
             opt.ApiVersionReader = new HeaderApiVersionReader("X-Version");
         });
+
+        var connectionString = _configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
+
+        if (!string.IsNullOrWhiteSpace(connectionString))
+        {
+            services.AddApplicationInsightsTelemetry();
+        }
         
-        services.AddApplicationInsightsTelemetry();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
